@@ -9,3 +9,11 @@ npm install react-intersection-observer
 
 zum hosten:
 npm run dev
+
+backend under:
+
+https://cloud.appwrite.io/login
+
+details:
+moritz.langenhan@icloud.com
+ecurie_aix_internship
