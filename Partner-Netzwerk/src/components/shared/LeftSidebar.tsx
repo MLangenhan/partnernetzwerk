@@ -41,7 +41,7 @@ const LeftSidebar = () => {
                         <p className='body-bold'>
                             {user.name}
                         </p>
-                        <p className='small-regular text-light-3'>
+                        <p className='small-regular text-ecurie-lightblue'>
                             @{user.username}
                         </p>
                     </div>
@@ -53,7 +53,7 @@ const LeftSidebar = () => {
 
                         return (
                             <li key={link.label}
-                                className={`leftsidebar-link group ${isActive && 'bg-primary-500'
+                                className={`leftsidebar-link group ${isActive && 'bg-ecurie-babyblue'
                                     }`}>
                                 <NavLink
                                     to={link.route}

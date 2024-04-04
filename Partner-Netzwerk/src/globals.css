@@ -131,7 +131,7 @@
   }
 
   .explore-search {
-    @apply h-12 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
+    @apply h-12 bg-dark-4 border-none placeholder:text-ecurie-white focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
   }
 
   /* Home */
@@ -223,7 +223,7 @@
   }
 
   .leftsidebar-link {
-    @apply rounded-lg base-medium hover:bg-primary-500 transition;
+    @apply rounded-lg base-medium hover:bg-ecurie-babyblue transition;
   }
 
   /* Post Card */
@@ -267,7 +267,7 @@
 
   /* Button */
   .shad-button_primary {
-    @apply bg-primary-500 hover:bg-primary-500 text-light-1 flex gap-2 !important;
+    @apply bg-ecurie-babyblue hover:bg-ecurie-darkblue text-light-1 flex gap-2 !important;
   }
 
   .shad-button_dark_4 {
