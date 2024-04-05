@@ -37,6 +37,10 @@ module.exports = {
         'ecurie-white': '#CCCCCC',
         'ecurie-darkblue': '#00468C',
         'ecurie-lightblue': '#8AB8E6',
+        'ecurie-lightred': '#C74C46',
+        'ecurie-darkred': '#941710',
+        'ecurie-red': '#C61E15',
+        'ecurie-blue': '#0055AA',
       },
       screens: {
         'xs': '480px',

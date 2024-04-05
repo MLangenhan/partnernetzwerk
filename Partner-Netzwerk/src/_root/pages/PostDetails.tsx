@@ -78,7 +78,7 @@ const PostDetails = () => {
                   <p className="base-medium lg:body-bold text-light-1">
                     {post?.creator.name}
                   </p>
-                  <div className="flex-center gap-2 text-light-3">
+                  <div className="flex-center gap-2 text-ecurie-lightblue">
                     <p className="subtle-semibold lg:small-regular ">
                       {multiFormatDateString(post?.$createdAt)}
                     </p>
@@ -126,7 +126,7 @@ const PostDetails = () => {
                 {post?.tags.map((tag: string, index: string) => (
                   <li
                     key={`${tag}${index}`}
-                    className="text-light-3 small-regular">
+                    className="text-ecurie-lightblue small-regular">
                     #{tag}
                   </li>
                 ))}
