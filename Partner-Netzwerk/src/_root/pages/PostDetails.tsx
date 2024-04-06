@@ -72,11 +72,14 @@ const PostDetails = () => {
                     "/assets/icons/profile-placeholder.svg"
                   }
                   alt="creator"
-                  className="w-8 h-8 lg:w-12 lg:h-12 rounded-full"
+                  className="w-8 h-8 lg:w-16 lg:h-16 rounded-full"
                 />
                 <div className="flex gap-1 flex-col">
                   <p className="base-medium lg:body-bold text-light-1">
                     {post?.creator.name}
+                  </p>
+                  <p className="base-medium text-ecurie-lightblue">
+                    {post.creator.username}
                   </p>
                   <div className="flex-center gap-2 text-ecurie-lightblue">
                     <p className="subtle-semibold lg:small-regular ">
@@ -105,9 +108,8 @@ const PostDetails = () => {
                 <Button
                   onClick={handleDeletePost}
                   variant="ghost"
-                  className={`ost_details-delete_btn ${
-                    user.id !== post?.creator.$id && "hidden"
-                  }`}>
+                  className={`ost_details-delete_btn ${user.id !== post?.creator.$id && "hidden"
+                    }`}>
                   <img
                     src={"/assets/icons/delete.svg"}
                     alt="delete"

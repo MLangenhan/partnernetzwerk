@@ -25,13 +25,16 @@ const PostCard = ({ post }: PostCardProps) => {
                 "/assets/icons/profile-placeholder.svg"
               }
               alt="creator"
-              className="w-12 lg:h-12 rounded-full"
+              className="w-14 lg:h-14 rounded-full"
             />
           </Link>
 
           <div className="flex flex-col">
             <p className="base-medium lg:body-bold text-light-1">
               {post.creator.name}
+            </p>
+            <p className="base-medium text-ecurie-lightblue">
+              {post.creator.username}
             </p>
             <div className="flex-center gap-2 text-ecurie-lightblue">
               <p className="subtle-semibold lg:small-regular ">

@@ -47,6 +47,7 @@ export type INavLink = {
     email: string;
     imageUrl: string;
     bio: string;
+
   };
   
   export type INewUser = {
