@@ -1,19 +1,24 @@
+1. Install the latest version of Node.js
+https://nodejs.org/en/download
+
+2. Restart your PC to finalize the installation
+
+3. Type these commands into a console of your choice, line by line
 npm install -D tailwindcss-animate
 npm install react-router-dom
 npm install -D tailwindcss postcss autoprefixer
 npm install -D @types/node
 npm install appwrite@13.0.0 // wichtig dass es 13.0.0 ist, sonst funktionieren die Querys nicht :/
-npm install @tankstack/react-query
+npm i @tanstack/react-query
 npm install react-dropzone
 npm install react-intersection-observer
 
-zum hosten:
+4. To host the website locally
 npm run dev
 
-backend under:
-
+Backend information and configuration
 https://cloud.appwrite.io/login
 
-details:
+Login Details:
 moritz.langenhan@icloud.com
 ecurie_aix_internship
