@@ -3,18 +3,22 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useUserContext } from "@/context/AuthContext";
 
 export default function AuthLayout() {
+  // Get the authentication state from the AuthContext
   const { isAuthenticated } = useUserContext();
 
   return (
     <>
       {isAuthenticated ? (
+        // If user is authenticated, redirect them to the home page
         <Navigate to="/" />
       ) : (
         <>
+          {/* Container for child components */}
           <section className="flex flex-1 justify-center items-center flex-col py-10">
             <Outlet />
           </section>
 
+          {/* Background image displayed on larger screens (XL and above) */}
           <img
             src="/assets/images/ecurie_aix_background_img.jpg"
             alt="logo"
@@ -28,5 +32,5 @@ export default function AuthLayout() {
         </>
       )}
     </>
-  )
+  );
 }

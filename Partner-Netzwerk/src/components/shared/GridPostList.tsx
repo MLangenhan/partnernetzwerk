@@ -1,16 +1,22 @@
-import { useUserContext } from '@/context/AuthContext'
-import { Models } from 'appwrite'
-import React from 'react'
-import { Link } from 'react-router-dom'
-import PostStats from './PostStats'
+import { useUserContext } from '@/context/AuthContext' // Import the  useUserContext hook from the AuthContext
 
+import { Models } from 'appwrite' // Import Models interface (likely from Appwrite)
+
+import React from 'react' // Import React library
+
+import { Link } from 'react-router-dom' // Import Link component for routing
+
+import PostStats from './PostStats' // Import PostStats component for displaying post stats
+
+// Define interface for GridPostList props
 type GridPostListProps = {
-  posts: Models.Document[]
-  showUser?: boolean,
-  showStats?: boolean
+  posts: Models.Document[] // An array of Appwrite Documents representing posts
+  showUser?: boolean; // Optional prop to control displaying the user info (defaults to true)
+  showStats?: boolean; // Optional prop to control displaying post stats (defaults to true)
 }
 
 const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostListProps) => {
+  // Destructure user object from the useUserContext hook
   const { user } = useUserContext();
 
   return (
@@ -26,6 +32,7 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
           </Link>
 
           <div className='grid-post_user'>
+            {/* Conditionally render user info based on showUser prop */}
             {showUser && (
               <div className='flex items-center justify-start gap-2 flex-1'>
                 <img
@@ -33,12 +40,11 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
                   alt='creator'
                   className='h-8 w-8 rounded-full'
                 />
-                <p className = 'line-clamp-1'>
-
-                </p>
+                <p className='line-clamp-1'> {/* Truncate username to one line */} </p>
               </div>
             )}
-            {showStats && <PostStats post = {post} userId = {user.id} />}
+            {/* Conditionally render PostStats component based on showStats prop */}
+            {showStats && <PostStats post={post} userId={user.id} />}
           </div>
         </li>
       ))}
@@ -46,4 +52,4 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
   )
 }
 
-export default GridPostList 
+export default GridPostList

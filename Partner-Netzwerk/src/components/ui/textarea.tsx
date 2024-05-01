@@ -1,9 +1,9 @@
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils" // Import utility function for class name concatenation
 
-export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+  // Define the props interface for Textarea component, extending the built-in TextareaHTMLAttributes
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, ...props }, ref) => {
@@ -19,6 +19,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     )
   }
 )
+
 Textarea.displayName = "Textarea"
 
 export { Textarea }

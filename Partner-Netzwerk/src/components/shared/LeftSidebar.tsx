@@ -8,21 +8,33 @@ import { sidebarLinks } from '@/constants'
 
 const LeftSidebar = () => {
 
+    // Get current pathname from useLocation hook
     const { pathname } = useLocation();
+
+    // Get signOut mutation and isSuccess state from useSignOutAccount hook
     const { mutate: signOut, isSuccess } = useSignOutAccount();
+
+    // Get navigate function from useNavigate hook for programmatic navigation
     const navigate = useNavigate();
+
+    // Get user data from useUserContext hook
     const { user } = useUserContext();
 
+    // useEffect hook to handle navigation after successful signOut
     useEffect(() => {
+        // If signOut mutation is successful, navigate back to home (/)
         if (isSuccess) {
-            navigate(0);
+            navigate(0); // navigate to index (home) route
         }
-        [isSuccess]
-    })
+        // Add dependency array to avoid infinite loop on isSuccess change
+        // This array ensures the effect only runs once on initial render and after isSuccess changes
+    }, [isSuccess])
+
     return (
         <nav className='leftsidebar'>
             <div className='flex flex-col gap-11'>
                 <Link to='/' className='flex gap-3 items-center'>
+                    {/* Company logo */}
                     <img
                         src="/assets/images/Ecurie-Aix-Logo-blau.png"
                         alt='logo'
@@ -32,6 +44,7 @@ const LeftSidebar = () => {
                 </Link>
 
                 <Link to={`/profile/${user.id}`} className='flex gap-3 items-center'>
+                    {/* User profile picture */}
                     <img
                         src={user.imageUrl || '/assets/icons/profile-placeholder.svg'}
                         alt='profile'
@@ -48,6 +61,7 @@ const LeftSidebar = () => {
                 </Link>
 
                 <ul className='flex flex-col gap-6'>
+                    {/* Loop through sidebar links and render navigation items */}
                     {sidebarLinks.map((link: INavLink) => {
                         const isActive = pathname === link.route;
 
@@ -72,6 +86,7 @@ const LeftSidebar = () => {
                     })}
                 </ul>
             </div>
+            {/* Logout button */}
             <Button variant='ghost' className='shad-button_ghost' onClick={() => signOut()}>
                 <img
                     src='/assets/icons/logout.svg'

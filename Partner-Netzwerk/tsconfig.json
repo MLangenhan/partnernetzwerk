@@ -1,33 +1,38 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
+    "target": "ES2020", // Set the target ECMAScript version for generated JavaScript
+    "useDefineForClassFields": true, // Use `defineProperties` for class fields
+
+    "lib": [ // Include type definitions for libraries
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext", // Generate ECMAScript modules (ESM)
+    "skipLibCheck": true, // Skip type checking of included library files (.d.ts)
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "moduleResolution": "bundler", // Use bundler-specific module resolution logic
+    "allowImportingTsExtensions": true, // Allow importing TypeScript files with any extension
+    "resolveJsonModule": true, // Treat JSON files as modules
+    "isolatedModules": true, // Treat each file as a separate module
+    "noEmit": true, // Don't generate JavaScript output during compilation
+    "jsx": "react-jsx", // Use the React JSX factory function
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
+    "strict": true, // Enable all strict type checking options
+    "noUnusedLocals": true, // Warn about unused local variables
+    "noUnusedParameters": true, // Warn about unused function parameters
+    "noFallthroughCasesInSwitch": true, // Warn about switch cases that fall through
 
-    // Shadcn
-        "baseUrl": ".",
-        "paths": {
-          "@/*": [
-            "./src/*"
-          ]
-        }
+    // Shadowing
+    "baseUrl": ".", // Set the base directory for resolving non-relative module paths
+    "paths": {
+      "@/*": [ // Map "@/" path alias to "./src/*" for easy imports
+        "./src/*"
+      ]
+    }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"], // Specify files and folders to be included in compilation
+  "references": [{ "path": "./tsconfig.node.json" }] // Reference another tsconfig file
 }

@@ -1,25 +1,34 @@
-/** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+/**
+ * @type {import('tailwindcss').Config}
+ */
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  // Enables dark mode support with class based detection (`class` key)
   darkMode: ['class'],
+
+  // Specifies the paths to your application files for content scanning
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
+
   theme: {
+    // Container configuration for all screens
     container: {
-      center: true,
-      padding: '2rem',
+      center: true, // Centers the container horizontally
+      padding: '2rem', // Applies 2rem padding to the container
       screens: {
-        '2xl': '1400px',
-      
+        '2xl': '1400px', // Defines a new extra large screen breakpoint at 1400px
       },
     },
+
+    // Extends the default Tailwind theme with custom properties
     extend: {
       colors: {
+        // Custom color palette
         'primary-500': '#877EFF',
         'primary-600': '#5D5FEF',
         'secondary-500': '#FFB620',
@@ -43,32 +52,36 @@ module.exports = {
         'ecurie-blue': '#0055AA',
       },
       screens: {
+        // Adds an extra small screen breakpoint at 480px
         'xs': '480px',
-      
       },
       width: {
         '420': '420px',
         '465': '465px',
       },
       fontFamily: {
+        // Defines a custom font family named 'inter' using 'Inter' font
         inter: ['Inter', 'sans-serif'],
-
       },
       keyframes: {
+        // Defines custom animation keyframes for accordion content expansion/collapse
         'accordion-down': {
-          from: { height: 0 },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          from: { height: 0 }, // Starts from 0 height
+          to: { height: 'var(--radix-accordion-content-height)' }, // Animates to accordion content height
         },
         'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: 0 },
+          from: { height: 'var(--radix-accordion-content-height)' }, // Starts from accordion content height
+          to: { height: 0 }, // Animates to 0 height
         },
       },
       animation: {
+        // Defines animation names using the keyframes
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
+
+  // Includes the tailwindcss-animate plugin for animation utilities
   plugins: [require('tailwindcss-animate')],
 };
