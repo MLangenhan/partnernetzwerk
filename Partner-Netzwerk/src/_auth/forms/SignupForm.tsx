@@ -13,6 +13,16 @@ import { SignupValidation } from "@/lib/validation";
 import { useUserContext } from "@/context/AuthContext";
 import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+
 const SignupForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -86,7 +96,7 @@ const SignupForm = () => {
 
         <form
           onSubmit={form.handleSubmit(handleSignup)}
-          className="flex flex-col gap-5 w-full mt-4">
+          className="flex flex-col gap-3 w-full mt-4">
           <FormField
             control={form.control}
             name="name"
@@ -100,7 +110,21 @@ const SignupForm = () => {
               </FormItem>
             )}
           />
+          
+          <DropdownMenu> 
+            <p className="text-sm">Rolle</p>
+            <DropdownMenuTrigger className="bg-dark-4 text-right pr-4 pb-3 pt-2 outline outline-2 rounded outline-dark-4">⌄</DropdownMenuTrigger>
+            <DropdownMenuContent className = "bg-dark-1 border-4 border-dark-4 text-right w-96">
+              <DropdownMenuLabel>Ecurie-Teammitglied</DropdownMenuLabel>
+              <DropdownMenuLabel>Ecurie-Alumni</DropdownMenuLabel>
+              <DropdownMenuSeparator className = "color-dark-2" />
+              <DropdownMenuLabel>Sponsor</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel>Fertiger</DropdownMenuLabel>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
+          
           <FormField
             control={form.control}
             name="username"
@@ -135,6 +159,20 @@ const SignupForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="shad-form_label">Password</FormLabel>
+                <FormControl>
+                  <Input type="password" className="shad-input" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="shad-form_label">LinkedIn</FormLabel>
                 <FormControl>
                   <Input type="password" className="shad-input" {...field} />
                 </FormControl>
