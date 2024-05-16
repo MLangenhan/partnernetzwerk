@@ -82,9 +82,27 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      maskImage: {
+        'gradient-mask': 'linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0))',
+      },
     },
   },
-  variants: {},
+  variants: {
+    extend: {},
+  },
   // Includes the tailwindcss-animate plugin for animation utilities
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.mask-gradient': {
+          '-webkit-mask-image': 'linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0))',
+          'mask-image': 'linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0))',
+          'transition': 'filter 0.9s, -webkit-mask-image 0.9s, mask-image 0.9s',
+        },
+      };
+
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
 };
