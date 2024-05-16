@@ -55,13 +55,16 @@ module.exports = {
         // Adds an extra small screen breakpoint at 480px
         'xs': '480px',
       },
+      minHeight: {
+        '100': '32rem',
+      },
       width: {
         '420': '420px',
         '465': '465px',
       },
       fontFamily: {
-        // Defines a custom font family named 'inter' using 'Inter' font
-        inter: ['Inter', 'sans-serif'],
+        // Defines a custom font 
+        'Univers LT Std': ['"UniversLTStd"'],
       },
       keyframes: {
         // Defines custom animation keyframes for accordion content expansion/collapse
@@ -81,7 +84,7 @@ module.exports = {
       },
     },
   },
-
+  variants: {},
   // Includes the tailwindcss-animate plugin for animation utilities
   plugins: [require('tailwindcss-animate')],
 };
