@@ -55,7 +55,7 @@ const PostDetails = () => {
         <Loader />
       ) : (
         <div className="post_details-card">
-          <a href={post?.imageUrl} target="_blank" className="w-3/5">
+          <a href={post?.imageUrl} target="_blank" className="w-1/2">
             <img
               src={post?.imageUrl}
               alt="creator"
