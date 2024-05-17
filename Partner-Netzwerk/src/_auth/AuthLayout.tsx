@@ -14,23 +14,22 @@ export default function AuthLayout() {
         <Navigate to="/" />
       ) : (
         <>
-          {/* Container for child components */}
-          <section className="flex flex-1 justify-center items-center flex-col py-10">
-            <Outlet />
-          </section>
+          {/* Full-screen background video */}
+          <video 
+            src={VideoBg} 
+            autoPlay 
+            loop 
+            muted 
+            className="fixed top-0 left-0 w-full h-full object-cover -z-10"
+          />
 
-          {/* Background image displayed on larger screens (XL and above) */}
-          {/*<img
-            src="/assets/images/ecurie_aix_background_img.jpg"
-            alt="logo"
-            className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat"
-            style={{
-              WebkitMaskImage: 'linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0))',
-              maskImage: 'linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0))',
-              transition: 'filter 0.5s, -webkit-mask-image 0.5s, mask-image 0.5s'
-            }} 
-          /> */}
-          <video src={VideoBg} autoPlay loop  muted className = "w-3/5 h-auto object-cover mask-gradient"/>
+          {/* Semi-transparent overlay */}
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60 -z-10"></div>
+
+          {/* Container for child components */}
+          <section className="flex flex-1 justify-center items-center flex-col py-10 relative z-10">
+              <Outlet />
+          </section>
         </>
       )}
     </>

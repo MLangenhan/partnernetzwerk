@@ -64,7 +64,8 @@ module.exports = {
       },
       fontFamily: {
         // Defines a custom font 
-        'Univers LT Std': ['"UniversLTStd"'],
+        'Univers LT Std': ['"UniversLTStd"', 'system-ui', 'sans-serif'],
+        'Univers_LT_Std_57': ['"UniversLTStd57"', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         // Defines custom animation keyframes for accordion content expansion/collapse

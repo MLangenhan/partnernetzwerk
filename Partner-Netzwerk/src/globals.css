@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,31 +5,31 @@
 @layer base {
   @font-face {
     font-family: 'Univers LT Std';
-    src: url(./fonts/UniversFontpack/);
-    src: local('Univers LT Std 47 Light Condensed'), local('UniversLTStd-LightCn'),
-        url(./fonts/UniversFontpack/UniversLTStd-LightCn.eot?#iefix) format('embedded-opentype'),
-        url(./fonts/UniversFontpack/UniversLTStd-LightCn.woff2) format('woff2'),
-        url(./fonts/UniversFontpack/UniversLTStd-LightCn.woff) format('woff'),
-        url(./fonts/UniversFontpack/UniversLTStd-LightCn.ttf) format('truetype');
-        font-weight: 00;
-      font-style: normal;
+    src: url('./fonts/UniversFontpack/UniversLTStd-LightCn.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/UniversFontpack/UniversLTStd-LightCn.woff2') format('woff2'),
+         url('./fonts/UniversFontpack/UniversLTStd-LightCn.woff') format('woff'),
+         url('./fonts/UniversFontpack/UniversLTStd-LightCn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Univers_LT_Std_57';
+    src: url('./fonts/UniversFontpack/UniversLTStd-Cn.eot') format('embedded-opentype'),
+         url('./fonts/UniversFontpack/UniversLTStd-Cn.woff2') format('woff2'),
+         url('./fonts/UniversFontpack/UniversLTStd-Cn.woff') format('woff'),
+         url('./fonts/UniversFontpack/UniversLTStd-Cn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    font-family: 'Univers LT Std', system-ui, sans-serif;
+    background-color: #000000;
+    color: #ffffff;
   }
 }
 
-* {
-  @apply box-border list-none p-0 m-0 scroll-smooth;
-  }
-
-body {
-  background-color: #000000;
-  color: #ffffff
-}
-
-@layer base {
-  html {
-    font-family: "Univers LT Std", system-ui, sans-serif;
-  }
-}
 
 
 
@@ -214,7 +212,7 @@ body {
 
   /* File uploader */
   .file_uploader-img {
-    @apply h-80 lg:h-[480px] w-full rounded-[24px] object-cover object-top;
+    @apply h-80 lg:h-[480px] w-full rounded-[24px] object-scale-down object-center;
   }
 
   .file_uploader-label {

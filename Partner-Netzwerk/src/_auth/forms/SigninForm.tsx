@@ -56,7 +56,7 @@ const SigninForm = () => {
       <div className="sm:w-420 flex-center flex-col">
         <img src="/assets/images/Ecurie-Aix-Logo-blau.png" alt="logo" className="mb-10 size-18"/>
 
-        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
+        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12 font-Univers_LT_Std_57">
           Log in to your account
         </h2>
         <p className="text-ecurie-lightblue small-medium md:base-regular mt-2">
@@ -93,7 +93,7 @@ const SigninForm = () => {
             )}
           />
 
-          <Button type="submit" className="shad-button_primary">
+          <Button type="submit" className="shad-button_primary font-Univers_LT_Std_57">
             {isUserLoading ? (
               <div className="flex-center gap-2">
                 <Loader /> Loading...

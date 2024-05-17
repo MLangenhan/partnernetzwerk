@@ -51,7 +51,7 @@ const LeftSidebar = () => {
                         className='h-14 w-14 rounded-full'
                     />
                     <div className='flex flex-col'>
-                        <p className='body-bold'>
+                        <p className='body-bold font-Univers_LT_Std_57'>
                             {user.name}
                         </p>
                         <p className='small-regular text-ecurie-lightblue'>
@@ -67,7 +67,7 @@ const LeftSidebar = () => {
 
                         return (
                             <li key={link.label}
-                                className={`leftsidebar-link group ${isActive && 'bg-ecurie-babyblue'
+                                className={`leftsidebar-link group ${isActive && 'bg-ecurie-babyblue font-Univers_LT_Std_57'
                                     }`}>
                                 <NavLink
                                     to={link.route}

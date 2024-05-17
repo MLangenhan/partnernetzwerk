@@ -55,12 +55,13 @@ const PostDetails = () => {
         <Loader />
       ) : (
         <div className="post_details-card">
-          <img
-            src={post?.imageUrl}
-            alt="creator"
-            className="post_details-img"
-          />
-
+          <a href={post?.imageUrl} target="_blank" className="w-3/5">
+            <img
+              src={post?.imageUrl}
+              alt="creator"
+              className="file_uploader-img"
+            />
+          </a>
           <div className="post_details-info">
             <div className="flex-between w-full">
               <Link
@@ -75,7 +76,7 @@ const PostDetails = () => {
                   className="w-8 h-8 lg:w-16 lg:h-16 rounded-full"
                 />
                 <div className="flex gap-1 flex-col">
-                  <p className="base-medium lg:body-bold text-light-1">
+                  <p className="base-medium lg:body-bold text-light-1 font-Univers_LT_Std_57">
                     {post?.creator.name}
                   </p>
                   <p className="base-medium text-ecurie-lightblue">
