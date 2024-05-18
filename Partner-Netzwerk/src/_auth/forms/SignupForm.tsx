@@ -1,7 +1,9 @@
+import * as React from "react"
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -15,8 +17,8 @@ import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/querie
 
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -42,6 +44,14 @@ const SignupForm = () => {
   const { mutateAsync: createUserAccount, isLoading: isCreatingAccount } = useCreateUserAccount();
   const { mutateAsync: signInAccount, isLoading: isSigningInUser } = useSignInAccount();
 
+  // Dropdown Menu Checkbox
+  type Checked = DropdownMenuCheckboxItemProps["checked"]
+
+  const [showEcurie_Aix, setshowEcurie_Aix] = React.useState<Checked>(false)
+  const [showEcurie_Alumni, setShowEcurie_Alumni] = React.useState<Checked>(false)
+  const [showSponsor, setShowSponsor] = React.useState<Checked>(false)
+  const [showManufacturer, setShowManufacturer] = React.useState<Checked>(false)
+
   // Handler
   const handleSignup = async (user: z.infer<typeof SignupValidation>) => {
     try {
@@ -49,7 +59,7 @@ const SignupForm = () => {
 
       if (!newUser) {
         toast({ title: "Sign up failed. Please try again.", });
-        
+
         return;
       }
 
@@ -60,9 +70,9 @@ const SignupForm = () => {
 
       if (!session) {
         toast({ title: "Something went wrong. Please login your new account", });
-        
+
         navigate("/sign-in");
-        
+
         return;
       }
 
@@ -74,7 +84,7 @@ const SignupForm = () => {
         navigate("/");
       } else {
         toast({ title: "Login failed. Please try again.", });
-        
+
         return;
       }
     } catch (error) {
@@ -85,7 +95,7 @@ const SignupForm = () => {
   return (
     <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
-      <img src="/assets/images/Ecurie-Aix-Logo-blau.png" alt="logo" className="mb-10 size-18"/>
+        <img src="/assets/images/Ecurie-Aix-Logo-blau.png" alt="logo" className="mb-10 size-18" />
 
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12 font-Univers_LT_Std_57">
           Create a new account
@@ -110,21 +120,43 @@ const SignupForm = () => {
               </FormItem>
             )}
           />
-          
-          <DropdownMenu> 
-            <p className="text-sm">Rolle</p>
+
+          <DropdownMenu>
+            <p className="text-sm">Role</p>
             <DropdownMenuTrigger className="bg-dark-4 text-right pr-4 pb-3 pt-2 outline outline-2 rounded outline-dark-4">⌄</DropdownMenuTrigger>
-            <DropdownMenuContent className = "bg-dark-1 border-4 border-dark-4 text-right w-96">
-              <DropdownMenuLabel>Ecurie-Teammitglied</DropdownMenuLabel>
-              <DropdownMenuLabel>Ecurie-Alumni</DropdownMenuLabel>
-              <DropdownMenuSeparator className = "color-dark-2" />
-              <DropdownMenuLabel>Sponsor</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuLabel>Fertiger</DropdownMenuLabel>
+            <DropdownMenuContent className="bg-dark-1 border-4 border-dark-4 w-96">
+              <DropdownMenuLabel>Choose Roles</DropdownMenuLabel>
+              <DropdownMenuCheckboxItem
+                checked={showEcurie_Aix}
+                onCheckedChange={setshowEcurie_Aix}
+                className = "hover:bg-ecurie-babyblue"
+              >
+                Ecurie-Aix
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                checked={showEcurie_Alumni}
+                onCheckedChange={setShowEcurie_Alumni}
+                className = "hover:bg-ecurie-darkblue"
+              >
+                Ecurie-Alumni
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                checked={showSponsor}
+                onCheckedChange={setShowSponsor}
+                className = "hover:bg-ecurie-lightred"
+              >
+                Sponsor
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                checked={showManufacturer}
+                onCheckedChange={setShowManufacturer}
+                className = "hover:bg-ecurie-darkred"
+              >
+                Manufacturer
+              </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
-          
           <FormField
             control={form.control}
             name="username"
