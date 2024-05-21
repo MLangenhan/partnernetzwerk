@@ -11,7 +11,7 @@ import {
   useGetUserPosts,
   useDeletePost,
 } from "@/lib/react-query/queriesAndMutations";
-import { multiFormatDateString } from "@/lib/utils";
+import { multiFormatDateString, getNameColor } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
 
 const PostDetails = () => {
@@ -33,6 +33,13 @@ const PostDetails = () => {
     deletePost({ postId: id, imageId: post?.imageId });
     navigate(-1);
   };
+
+  const role = post?.creator.role && post.creator.role.length > 0 ? post.creator.role[0] : '';
+
+  const nameColor = getNameColor(role);
+
+  // Filter out empty strings from tags
+  const filteredTags = post?.tags.filter((tag: string) => tag.trim() !== '');
 
   return (
     <div className="post_details-container">
@@ -73,13 +80,13 @@ const PostDetails = () => {
                     "/assets/icons/profile-placeholder.svg"
                   }
                   alt="creator"
-                  className="w-8 h-8 lg:w-16 lg:h-16 rounded-full"
+                  className="w-8 h-8 lg:w-16 lg:h-16 rounded-full object-cover"
                 />
                 <div className="flex gap-1 flex-col">
                   <p className="base-medium lg:body-bold text-light-1 font-Univers_LT_Std_57">
                     {post?.creator.name}
                   </p>
-                  <p className="base-medium text-ecurie-lightblue">
+                  <p className={`base-medium ${nameColor}`}>
                     @{post.creator.username}
                   </p>
                   <div className="flex-center gap-2 text-ecurie-white">
@@ -123,22 +130,23 @@ const PostDetails = () => {
 
             <hr className="border w-full border-dark-4/80" />
 
-            <div className="flex flex-col flex-1 w-full small-medium lg:base-regular">
-              <p>{post?.caption}</p>
-              <ul className="flex gap-1 mt-2">
-                {post?.tags.map((tag: string, index: string) => (
-                  <li
-                    key={`${tag}${index}`}
-                    className="text-ecurie-blue small-regular">
-                    #{tag}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Post Content Section */}
+              <div className="small-medium lg:base-medium py-5">
+                <p>{post.caption}</p>
+                {filteredTags.length > 0 && (
+                  <ul className="flex gap-1 mt-2">
+                    {filteredTags.map((tag: string, index: number) => (
+                      <li key={`${tag}${index}`} className="text-ecurie-blue small-regular">
+                        #{tag}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
-            <div className="w-full">
-              <PostStats post={post} userId={user.id} />
-            </div>
+              <div className="w-full">
+                <PostStats post={post} userId={user.id} />
+              </div>
           </div>
         </div>
       )}

@@ -1,11 +1,9 @@
 import { Models } from "appwrite"; // Import models interface from Appwrite
-
-// Import Link from react-router-dom for navigation
 import { Link } from "react-router-dom";
-
 import PostStats from "@/components/shared/PostStats"; // Import PostStats component
-import { multiFormatDateString } from "@/lib/utils"; // Import date formatting function
+import { multiFormatDateString, getNameColor } from "@/lib/utils"; // Import date formatting function
 import { useUserContext } from "@/context/AuthContext"; // Import user context hook
+
 
 // Define props interface for PostCard component
 type PostCardProps = {
@@ -16,7 +14,18 @@ const PostCard = ({ post }: PostCardProps) => {
   const { user } = useUserContext(); // Get user data from context
 
   // Exit if there's no creator data
-  if (!post.creator) return;
+  if (!post.creator) return null;
+
+  // Extract the role, ensuring it's a string
+  const role = post.creator.role && post.creator.role.length > 0 ? post.creator.role[0] : '';
+  
+  // Debug: Log the resolved role
+  console.log('resolved role:', role);
+
+  const nameColor = getNameColor(role);
+
+  // Filter out empty strings from tags
+  const filteredTags = post.tags.filter((tag: string) => tag.trim() !== '');
 
   return (
     <div className="post-card">
@@ -25,12 +34,9 @@ const PostCard = ({ post }: PostCardProps) => {
         <div className="flex items-center gap-3">
           <Link to={`/profile/${post.creator.$id}`}>
             <img
-              src={
-                post.creator?.imageUrl ||
-                "/assets/icons/profile-placeholder.svg"
-              }
+              src={post.creator.imageUrl || "/assets/icons/profile-placeholder.svg"}
               alt="creator"
-              className="w-14 lg:h-14 rounded-full"
+              className="w-14 lg:h-14 rounded-full object-cover"
             />
           </Link>
 
@@ -38,7 +44,7 @@ const PostCard = ({ post }: PostCardProps) => {
             <p className="base-medium lg:body-bold text-light-1 font-Univers_LT_Std_57">
               {post.creator.name}
             </p>
-            <p className="base-medium text-ecurie-lightblue">
+            <p className={`base-medium ${nameColor}`}>
               @{post.creator.username}
             </p>
             <div className="flex-center gap-2 text-ecurie-white">
@@ -54,29 +60,31 @@ const PostCard = ({ post }: PostCardProps) => {
         </div>
 
         {/* Edit Button (hidden if not current user's post) */}
-        <Link
-          to={`/update-post/${post.$id}`}
-          className={`${user.id !== post.creator.$id && "hidden"}`}>
-          <img
-            src={"/assets/icons/edit.svg"}
-            alt="edit"
-            width={20}
-            height={20}
-          />
-        </Link>
+        {user.id === post.creator.$id && (
+          <Link to={`/update-post/${post.$id}`}>
+            <img
+              src={"/assets/icons/edit.svg"}
+              alt="edit"
+              width={20}
+              height={20}
+            />
+          </Link>
+        )}
       </div>
 
       {/* Post Content Section */}
       <Link to={`/posts/${post.$id}`}>
         <div className="small-medium lg:base-medium py-5">
           <p>{post.caption}</p>
-          <ul className="flex gap-1 mt-2">
-            {post.tags.map((tag: string, index: string) => (
-              <li key={`${tag}${index}`} className="text-ecurie-blue small-regular">
-                #{tag}
-              </li>
-            ))}
-          </ul>
+          {filteredTags.length > 0 && (
+            <ul className="flex gap-1 mt-2">
+              {filteredTags.map((tag: string, index: number) => (
+                <li key={`${tag}${index}`} className="text-ecurie-blue small-regular">
+                  #{tag}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <img

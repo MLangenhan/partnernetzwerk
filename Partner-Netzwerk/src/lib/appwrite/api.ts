@@ -1,5 +1,4 @@
 import { ID, Query } from "appwrite";
-
 import { appwriteConfig, account, databases, storage, avatars } from "./config";
 import { IUpdatePost, INewPost, INewUser, IUpdateUser } from "@/types";
 
@@ -14,7 +13,8 @@ export async function createUserAccount(user: INewUser) {
       ID.unique(),
       user.email,
       user.password,
-      user.name
+      user.name,
+      user.role
     );
 
     if (!newAccount) throw Error;
@@ -25,6 +25,7 @@ export async function createUserAccount(user: INewUser) {
       accountId: newAccount.$id,
       name: newAccount.name,
       email: newAccount.email,
+      role: user.role,
       username: user.username,
       imageUrl: avatarUrl,
     });
@@ -43,6 +44,7 @@ export async function saveUserToDB(user: {
   name: string;
   imageUrl: URL;
   username?: string;
+  role: string[];
 }) {
   try {
     const newUser = await databases.createDocument(
@@ -110,6 +112,17 @@ export async function signOutAccount() {
     return session;
   } catch (error) {
     console.log(error);
+  }
+}
+
+// ============================== DELETE SESSION
+export async function deleteSession() {
+  try {
+    await account.deleteSession("current"); // Assuming "current" deletes the current session
+    console.log("Session deleted successfully");
+  } catch (error) {
+    console.log("Failed to delete session:", error);
+    throw error;
   }
 }
 

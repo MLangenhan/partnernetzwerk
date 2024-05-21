@@ -1,9 +1,8 @@
-import * as React from "react"
+import * as React from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -20,15 +19,13 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
+} from "@/components/ui/dropdown-menu";
 
 const SignupForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const { checkAuthUser, clearSession, isLoading: isUserLoading } = useUserContext();
 
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -37,29 +34,34 @@ const SignupForm = () => {
       username: "",
       email: "",
       password: "",
+      role: [],
     },
   });
 
-  // Queries
   const { mutateAsync: createUserAccount, isLoading: isCreatingAccount } = useCreateUserAccount();
   const { mutateAsync: signInAccount, isLoading: isSigningInUser } = useSignInAccount();
 
-  // Dropdown Menu Checkbox
-  type Checked = DropdownMenuCheckboxItemProps["checked"]
+  const [selectedRoles, setSelectedRoles] = React.useState<string[]>([]);
 
-  const [showEcurie_Aix, setshowEcurie_Aix] = React.useState<Checked>(false)
-  const [showEcurie_Alumni, setShowEcurie_Alumni] = React.useState<Checked>(false)
-  const [showSponsor, setShowSponsor] = React.useState<Checked>(false)
-  const [showManufacturer, setShowManufacturer] = React.useState<Checked>(false)
+  const handleRoleChange = (role: string) => {
+    const updatedRoles = selectedRoles.includes(role)
+      ? selectedRoles.filter(r => r !== role)
+      : [...selectedRoles, role];
+    setSelectedRoles(updatedRoles);
+    form.setValue("role", updatedRoles); // Update form with the latest roles
+  };
 
-  // Handler
   const handleSignup = async (user: z.infer<typeof SignupValidation>) => {
     try {
-      const newUser = await createUserAccount(user);
+      await clearSession(); // Clear existing sessions before attempting to sign up
+
+      const newUser = await createUserAccount({
+        ...user,
+        role: selectedRoles,
+      });
 
       if (!newUser) {
-        toast({ title: "Sign up failed. Please try again.", });
-
+        toast({ title: "Sign up failed. Please try again." });
         return;
       }
 
@@ -69,10 +71,8 @@ const SignupForm = () => {
       });
 
       if (!session) {
-        toast({ title: "Something went wrong. Please login your new account", });
-
+        toast({ title: "Something went wrong. Please login your new account" });
         navigate("/sign-in");
-
         return;
       }
 
@@ -80,11 +80,9 @@ const SignupForm = () => {
 
       if (isLoggedIn) {
         form.reset();
-
         navigate("/");
       } else {
-        toast({ title: "Login failed. Please try again.", });
-
+        toast({ title: "Login failed. Please try again." });
         return;
       }
     } catch (error) {
@@ -121,41 +119,28 @@ const SignupForm = () => {
             )}
           />
 
-          <DropdownMenu>
-            <p className="text-sm">Role</p>
-            <DropdownMenuTrigger className="bg-dark-4 text-right pr-4 pb-3 pt-2 outline outline-2 rounded outline-dark-4">⌄</DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-dark-1 border-4 border-dark-4 w-96">
-              <DropdownMenuLabel>Choose Roles</DropdownMenuLabel>
-              <DropdownMenuCheckboxItem
-                checked={showEcurie_Aix}
-                onCheckedChange={setshowEcurie_Aix}
-                className = "hover:bg-ecurie-babyblue"
-              >
-                Ecurie-Aix
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={showEcurie_Alumni}
-                onCheckedChange={setShowEcurie_Alumni}
-                className = "hover:bg-ecurie-darkblue"
-              >
-                Ecurie-Alumni
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={showSponsor}
-                onCheckedChange={setShowSponsor}
-                className = "hover:bg-ecurie-lightred"
-              >
-                Sponsor
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={showManufacturer}
-                onCheckedChange={setShowManufacturer}
-                className = "hover:bg-ecurie-darkred"
-              >
-                Manufacturer
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <FormItem>
+            <FormLabel className="shad-form_label">Role(s)</FormLabel>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="bg-dark-4 text-left px-4 py-2 outline outline-2 rounded outline-dark-4 flex justify-between items-center w-full">
+                <span>{selectedRoles.length > 0 ? selectedRoles.join(', ') : 'Select roles'}</span>
+                <span className="ml-2">⌄</span>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-dark-1 border-4 border-dark-4 w-full">
+                <DropdownMenuLabel>Choose Roles</DropdownMenuLabel>
+                {["Ecurie-Aix", "Alumni", "Partner", "Manufacturer"].map(role => (
+                  <DropdownMenuCheckboxItem
+                    key={role}
+                    checked={selectedRoles.includes(role)}
+                    onCheckedChange={() => handleRoleChange(role)}
+                    className="hover:bg-ecurie-babyblue"
+                  >
+                    {role}
+                  </DropdownMenuCheckboxItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </FormItem>
 
           <FormField
             control={form.control}

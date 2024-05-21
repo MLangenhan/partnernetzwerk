@@ -7,12 +7,12 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import { Button } from "@/components/ui/button";
 import { LikedPosts } from "@/_root/pages";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetUserById } from "@/lib/react-query/queriesAndMutations";
 import GridPostList from "@/components/shared/GridPostList";
 import Loader from "@/components/shared/Loader";
+import { getNameColor } from "@/lib/utils";
 
 interface StabBlockProps {
   value: string | number;
@@ -33,6 +33,14 @@ const Profile = () => {
 
   const { data: currentUser } = useGetUserById(id || "");
 
+  const role = currentUser?.role && currentUser.role.length > 0 ? currentUser.role[0] : '';
+
+  console.log("role:", role)
+
+  const nameColor = getNameColor(role);
+
+  console.log(nameColor)
+
   if (!currentUser)
     return (
       <div className="flex-center w-full h-full">
@@ -47,14 +55,14 @@ const Profile = () => {
           <img
             src={currentUser.imageUrl && currentUser.imageUrl !== "" ? currentUser.imageUrl : "/assets/icons/default_profilepicture.svg"}
             alt="profile"
-            className="w-28 h-28 lg:h-36 lg:w-36 rounded-full"
+            className="w-28 h-28 lg:h-36 lg:w-36 rounded-full object-cover"
           />
           <div className="flex flex-col flex-1 justify-between md:mt-2">
             <div className="flex flex-col w-full">
               <h1 className="text-center xl:text-left h3-bold md:h1-semibold w-full font-Univers_LT_Std_57">
                 {currentUser.name}
               </h1>
-              <p className="small-regular md:body-medium text-ecurie-lightblue text-center xl:text-left">
+              <p className={`small-regular md:body-medium text-center xl:text-left ${nameColor}`}>
                 @{currentUser.username}
               </p>
             </div>

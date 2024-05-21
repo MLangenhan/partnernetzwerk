@@ -60,3 +60,24 @@ export const multiFormatDateString = (timestamp = ""): string => {
 export const checkIsLiked = (likeList: string[], userId: string) => {
   return likeList.includes(userId); // Check if user ID exists in the like list
 };
+
+// Determine color based on user's role
+export const getNameColor = (role: string) => {
+  switch (role) {
+    case 'Ecurie-Aix':
+      console.log(role);
+      return 'text-ecurie-lightblue';
+    case 'Alumni':
+      console.log(role);
+      return 'text-ecurie-babyblue';
+    case 'Sponsor':
+      console.log(role);
+      return 'text-ecurie-red';
+    case 'Manufacturer':
+      console.log(role);
+      return 'text-ecurie-darkred';
+    default:
+      console.log(role);
+      return 'text-ecurie-lightblue';
+  }
+};

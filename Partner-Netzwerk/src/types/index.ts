@@ -53,6 +53,7 @@ export type IUser = {
     email: string; // User's email address
     imageUrl: string; // URL for the user's profile image
     bio: string; // User's biography
+    role: string[];
   };
   
   // This type defines the data required to create a new user
@@ -61,4 +62,5 @@ export type INewUser = {
     email: string; // User's email address
     username: string; // User's desired username
     password: string; // User's password
+    role: string[];
   };

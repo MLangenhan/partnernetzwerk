@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '../ui/button'
 import { useSignOutAccount } from '@/lib/react-query/queriesAndMutations'
@@ -19,6 +19,31 @@ const LeftSidebar = () => {
 
     // Get user data from useUserContext hook
     const { user } = useUserContext();
+
+    const [nameColor, setNameColor] = useState('');
+
+    useEffect(() => {
+        // Determine color based on user's role
+        const role = user?.role[0] || '';
+        if (role === 'E') {
+            setNameColor('text-ecurie-lightblue');
+            console.log(user.role[0])
+        } else if (role === 'A') {
+            console.log(user.role[0])
+            setNameColor('text-ecurie-babyblue');
+        } else if (role === 'S'){
+            setNameColor('text-ecurie-red'); 
+            console.log(user.role[0])
+        }
+        else if (role === 'M'){
+            setNameColor('text-ecurie-darkred');
+            console.log(user.role[0])
+        }
+        else {
+            setNameColor('text-black');
+            console.log(user.role[0])
+        }
+    }, [user]);
 
     // useEffect hook to handle navigation after successful signOut
     useEffect(() => {
@@ -48,13 +73,13 @@ const LeftSidebar = () => {
                     <img
                         src={user.imageUrl || '/assets/icons/profile-placeholder.svg'}
                         alt='profile'
-                        className='h-14 w-14 rounded-full'
+                        className='h-14 w-14 rounded-full object-cover'
                     />
                     <div className='flex flex-col'>
-                        <p className='body-bold font-Univers_LT_Std_57'>
+                    <p className="body-bold font-Univers_LT_Std_57">
                             {user.name}
                         </p>
-                        <p className='small-regular text-ecurie-lightblue'>
+                        <p className={`small-regular ${nameColor}`}>
                             @{user.username}
                         </p>
                     </div>

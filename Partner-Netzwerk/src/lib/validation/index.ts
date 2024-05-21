@@ -11,6 +11,7 @@ export const SignupValidation = z.object({
   username: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email(),
   password: z.string().min(8, { message: "Password must be at least 8 characters." }),
+  role: z.array(z.string()).min(1, "At least one role must be selected")
 });
 
 // This schema defines the validation rules for user signins
