@@ -23,6 +23,8 @@ export type IUpdateUser = {
     imageId: string; // ID of the user's image (optional)
     imageUrl: URL | string; // URL of the user's image (optional)
     file: File[]; // Files to upload for the user's image (optional)
+    abteilung: string;
+    telefon_nr: string;
   };
   
   // This type defines the data required to create a new post
@@ -54,6 +56,8 @@ export type IUser = {
     imageUrl: string; // URL for the user's profile image
     bio: string; // User's biography
     role: string[];
+    abteilung: string;
+    telefon_nr: string;
   };
   
   // This type defines the data required to create a new user

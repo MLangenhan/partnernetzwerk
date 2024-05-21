@@ -11,6 +11,8 @@ export const INITIAL_USER = {
   imageUrl: "",
   bio: "",
   role: [],
+  abteilung: "",
+  telefon_nr: "",
 };
 
 const INITIAL_STATE = {
@@ -55,6 +57,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           imageUrl: currentAccount.imageUrl,
           bio: currentAccount.bio,
           role: currentAccount.role[0] || [],
+          abteilung: currentAccount.abteilung,
+          telefon_nr: currentAccount.telefon_nr
         });
         setIsAuthenticated(true);
         return true;

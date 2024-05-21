@@ -35,6 +35,8 @@ const UpdateProfile = () => {
       username: user.username,
       email: user.email,
       bio: user.bio || "",
+      abteilung: user.abteilung || "",
+      telefon_nr: user.telefon_nr || "",
     },
   });
 
@@ -59,6 +61,8 @@ const UpdateProfile = () => {
       file: value.file,
       imageUrl: currentUser.imageUrl,
       imageId: currentUser.imageId,
+      abteilung: value.abteilung,
+      telefon_nr: value.telefon_nr,
     });
 
     if (!updatedUser) {
@@ -72,6 +76,8 @@ const UpdateProfile = () => {
       name: updatedUser?.name,
       bio: updatedUser?.bio,
       imageUrl: updatedUser?.imageUrl,
+      abteilung: updatedUser?.abteilung,
+      telefon_nr: updatedUser?.telefon_nr,
     });
     return navigate(`/profile/${id}`);
   };
@@ -156,6 +162,34 @@ const UpdateProfile = () => {
                       {...field}
                       disabled
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="abteilung"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="shad-form_label">Abteilung</FormLabel>
+                  <FormControl>
+                    <Input type="text" className="shad-input" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="telefon_nr"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="shad-form_label">Telefonnummer</FormLabel>
+                  <FormControl>
+                    <Input type="text" className="shad-input" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
