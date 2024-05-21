@@ -40,6 +40,21 @@ const Profile = () => {
   const nameColor = getNameColor(role);
 
   console.log(nameColor)
+  console.log(currentUser)
+  console.log(user)
+
+  var linkedInUrl: string
+
+  if (currentUser?.linkedin) {
+    // Ensure the LinkedIn URL is complete
+    linkedInUrl = currentUser?.linkedin.startsWith('http')
+      ? currentUser.linkedin
+      : `https://${currentUser?.linkedin}`;
+  }
+  else {
+    linkedInUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  }
+
 
   if (!currentUser)
     return (
@@ -63,13 +78,13 @@ const Profile = () => {
                 {currentUser.name}
               </h1>
               <p className={`small-regular md:body-medium text-center xl:text-left ${nameColor}`}>
-                @{currentUser.username} {currentUser.abteilung !== '' && (
+                @{currentUser.username} {currentUser.abteilung !== null && currentUser.abteilung !== '' && (
                   <span> | {currentUser.abteilung}</span>
                 )}
 
               </p>
               <div className="flex gap-2 pt-4">
-                {currentUser.telefon_nr !== '' && (
+                {currentUser.telefon_nr !== null && currentUser.telefon_nr !== '' && (
                   <>
                     <img
                       src={"/assets/icons/phone-icon.svg"}
@@ -95,20 +110,24 @@ const Profile = () => {
                   {currentUser.email}
                 </p>
               </div>
-              <div className="flex pt-2">
-                <div className=" bg-dark-4 px-1 py rounded-lg" >
-                  <a href="https://www.linkedin.com/" target="_blank">
-                    <img 
-                      src={"/assets/icons/linkedin-icon.svg"}
-                      alt="linkedin"
-                      width={20}
-                      height={20}
-                      className="object-center"
-                    />
-                    <p className="flex">
-                      {currentUser.name}
-                    </p>
-                  </a>
+              <div className="flex-left pt-2 pr-64 ">
+                <div className="">
+                  {currentUser.linkedin !== '' && currentUser.linkedin !== null && (
+                    <>
+                      <a href={linkedInUrl} target="_blank" className="h-8 bg-dark-4 text-light-1 flex-center gap-2 rounded-lg px-2">
+                        <img
+                          src={"/assets/icons/linkedin-icon.svg"}
+                          alt="linkedin"
+                          width={20}
+                          height={20}
+                          className=""
+                        />
+                        <p>
+                          | {currentUser.name}
+                        </p>
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

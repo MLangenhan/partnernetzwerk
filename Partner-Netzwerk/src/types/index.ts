@@ -25,6 +25,7 @@ export type IUpdateUser = {
     file: File[]; // Files to upload for the user's image (optional)
     abteilung: string;
     telefon_nr: string;
+    linkedin: string;
   };
   
   // This type defines the data required to create a new post
@@ -58,6 +59,7 @@ export type IUser = {
     role: string[];
     abteilung: string;
     telefon_nr: string;
+    linkedin: string;
   };
   
   // This type defines the data required to create a new user

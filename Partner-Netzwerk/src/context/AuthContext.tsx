@@ -13,6 +13,7 @@ export const INITIAL_USER = {
   role: [],
   abteilung: "",
   telefon_nr: "",
+  linkedin: "",
 };
 
 const INITIAL_STATE = {
@@ -58,7 +59,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           bio: currentAccount.bio,
           role: currentAccount.role[0] || [],
           abteilung: currentAccount.abteilung,
-          telefon_nr: currentAccount.telefon_nr
+          telefon_nr: currentAccount.telefon_nr,
+          linkedin: currentAccount.linkedin,
         });
         setIsAuthenticated(true);
         return true;

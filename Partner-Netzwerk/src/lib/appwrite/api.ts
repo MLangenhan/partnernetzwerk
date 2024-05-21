@@ -532,6 +532,7 @@ export async function updateUser(user: IUpdateUser) {
         imageId: image.imageId,
         abteilung: user.abteilung,
         telefon_nr: user.telefon_nr,
+        linkedin: user.linkedin,
       }
     );
 

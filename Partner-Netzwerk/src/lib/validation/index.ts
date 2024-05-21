@@ -29,6 +29,7 @@ export const ProfileValidation = z.object({
   bio: z.string(),
   telefon_nr: z.string(),
   abteilung: z.string(),
+  linkedin: z.string(),
 });
 
 // ============================================================

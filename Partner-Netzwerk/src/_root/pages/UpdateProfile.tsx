@@ -35,8 +35,9 @@ const UpdateProfile = () => {
       username: user.username,
       email: user.email,
       bio: user.bio || "",
-      abteilung: user.abteilung || "",
-      telefon_nr: user.telefon_nr || "",
+      abteilung: user.abteilung,
+      telefon_nr: user.telefon_nr,
+      linkedin: user.linkedin,
     },
   });
 
@@ -63,6 +64,7 @@ const UpdateProfile = () => {
       imageId: currentUser.imageId,
       abteilung: value.abteilung,
       telefon_nr: value.telefon_nr,
+      linkedin: value.linkedin,
     });
 
     if (!updatedUser) {
@@ -78,6 +80,7 @@ const UpdateProfile = () => {
       imageUrl: updatedUser?.imageUrl,
       abteilung: updatedUser?.abteilung,
       telefon_nr: updatedUser?.telefon_nr,
+      linkedin: updatedUser?.linkedin,
     });
     return navigate(`/profile/${id}`);
   };
@@ -188,6 +191,20 @@ const UpdateProfile = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="shad-form_label">Telefonnummer</FormLabel>
+                  <FormControl>
+                    <Input type="text" className="shad-input" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="linkedin"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="shad-form_label">LinkedIn Profillink</FormLabel>
                   <FormControl>
                     <Input type="text" className="shad-input" {...field} />
                   </FormControl>
