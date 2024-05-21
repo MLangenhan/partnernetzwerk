@@ -530,6 +530,8 @@ export async function updateUser(user: IUpdateUser) {
         bio: user.bio,
         imageUrl: image.imageUrl,
         imageId: image.imageId,
+        abteilung: user.abteilung,
+        telefon_nr: user.telefon_nr,
       }
     );
 

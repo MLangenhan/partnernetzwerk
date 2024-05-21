@@ -55,7 +55,7 @@ const Profile = () => {
           <img
             src={currentUser.imageUrl && currentUser.imageUrl !== "" ? currentUser.imageUrl : "/assets/icons/default_profilepicture.svg"}
             alt="profile"
-            className="w-28 h-28 lg:h-36 lg:w-36 rounded-full object-cover"
+            className="w-48 h-48 lg:h-64 lg:w-64 rounded-2xl object-cover"
           />
           <div className="flex flex-col flex-1 justify-between md:mt-2">
             <div className="flex flex-col w-full">
@@ -67,24 +67,30 @@ const Profile = () => {
               </p>
             </div>
 
-         {/*   <div className="flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20">
+            {/*   <div className="flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20">
               <StatBlock value={currentUser.posts.length} label="Posts" />
               <StatBlock value={0} label="Followers" /> 
               <StatBlock value={0} label="Following" />
             </div>
           */}
             <p className="small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm">
+              Abteilung: {currentUser.abteilung}
+            </p>
+            <p className="small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm">
+              Telefonnummer: {currentUser.telefon_nr}
+            </p>
+            <p className="small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm">
               {currentUser.bio}
             </p>
+
           </div>
 
           <div className="flex justify-center gap-4">
             <div className={`${user.id !== currentUser.$id && "hidden"}`}>
               <Link
                 to={`/update-profile/${currentUser.$id}`}
-                className={`h-12 bg-dark-4 px-5 text-light-1 flex-center gap-2 rounded-lg ${
-                  user.id !== currentUser.$id && "hidden"
-                }`}>
+                className={`h-12 bg-dark-4 px-5 text-light-1 flex-center gap-2 rounded-lg ${user.id !== currentUser.$id && "hidden"
+                  }`}>
                 <img
                   src={"/assets/icons/edit.svg"}
                   alt="edit"
@@ -104,9 +110,8 @@ const Profile = () => {
         <div className="flex max-w-5xl w-full">
           <Link
             to={`/profile/${id}`}
-            className={`profile-tab rounded-l-lg ${
-              pathname === `/profile/${id}` && "!bg-dark-3"
-            }`}>
+            className={`profile-tab rounded-l-lg ${pathname === `/profile/${id}` && "!bg-dark-3"
+              }`}>
             <img
               src={"/assets/icons/add-post.svg"}
               alt="posts"
@@ -117,9 +122,8 @@ const Profile = () => {
           </Link>
           <Link
             to={`/profile/${id}/liked-posts`}
-            className={`profile-tab rounded-r-lg ${
-              pathname === `/profile/${id}/liked-posts` && "!bg-dark-3"
-            }`}>
+            className={`profile-tab rounded-r-lg ${pathname === `/profile/${id}/liked-posts` && "!bg-dark-3"
+              }`}>
             <img
               src={"/assets/icons/like.svg"}
               alt="like"
