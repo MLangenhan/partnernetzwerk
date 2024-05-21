@@ -63,9 +63,57 @@ const Profile = () => {
                 {currentUser.name}
               </h1>
               <p className={`small-regular md:body-medium text-center xl:text-left ${nameColor}`}>
-                @{currentUser.username}
+                @{currentUser.username} {currentUser.abteilung !== '' && (
+                  <span> | {currentUser.abteilung}</span>
+                )}
+
               </p>
+              <div className="flex gap-2 pt-4">
+                {currentUser.telefon_nr !== '' && (
+                  <>
+                    <img
+                      src={"/assets/icons/phone-icon.svg"}
+                      alt="edit"
+                      width={20}
+                      height={20}
+                    />
+                    <p className="">
+                      {currentUser.telefon_nr}
+                    </p>
+                  </>
+                )}
+              </div>
+
+              <div className="flex gap-2 pt-1">
+                <img
+                  src={"/assets/icons/mail-icon.svg"}
+                  alt="edit"
+                  width={20}
+                  height={20}
+                />
+                <p className="">
+                  {currentUser.email}
+                </p>
+              </div>
+              <div className="flex pt-2">
+                <div className=" bg-dark-4 px-1 py rounded-lg" >
+                  <a href="https://www.linkedin.com/" target="_blank">
+                    <img 
+                      src={"/assets/icons/linkedin-icon.svg"}
+                      alt="linkedin"
+                      width={20}
+                      height={20}
+                      className="object-center"
+                    />
+                    <p className="flex">
+                      {currentUser.name}
+                    </p>
+                  </a>
+                </div>
+              </div>
             </div>
+
+
 
             {/*   <div className="flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20">
               <StatBlock value={currentUser.posts.length} label="Posts" />
@@ -73,12 +121,7 @@ const Profile = () => {
               <StatBlock value={0} label="Following" />
             </div>
           */}
-            <p className="small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm">
-              Abteilung: {currentUser.abteilung}
-            </p>
-            <p className="small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm">
-              Telefonnummer: {currentUser.telefon_nr}
-            </p>
+
             <p className="small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm">
               {currentUser.bio}
             </p>
