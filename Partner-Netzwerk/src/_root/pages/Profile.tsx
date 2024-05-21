@@ -92,7 +92,7 @@ const Profile = () => {
                   height={20}
                 />
                 <p className="flex whitespace-nowrap small-medium">
-                  Edit Profile
+                  Profil bearbeiten
                 </p>
               </Link>
             </div>
@@ -108,12 +108,12 @@ const Profile = () => {
               pathname === `/profile/${id}` && "!bg-dark-3"
             }`}>
             <img
-              src={"/assets/icons/posts.svg"}
+              src={"/assets/icons/add-post.svg"}
               alt="posts"
               width={20}
               height={20}
             />
-            Posts
+            Beiträge
           </Link>
           <Link
             to={`/profile/${id}/liked-posts`}
@@ -126,7 +126,7 @@ const Profile = () => {
               width={20}
               height={20}
             />
-            Liked Posts
+            Mit „Gefällt mir“ markiert
           </Link>
         </div>
       )}

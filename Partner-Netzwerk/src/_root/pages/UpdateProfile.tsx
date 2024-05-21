@@ -87,7 +87,7 @@ const UpdateProfile = () => {
             alt="edit"
             className="invert-white"
           />
-          <h2 className="h3-bold md:h2-bold text-left w-full">Edit Profile</h2>
+          <h2 className="h3-bold md:h2-bold text-left w-full">Profil bearbeiten</h2>
         </div>
 
         <Form {...form}>
@@ -129,7 +129,7 @@ const UpdateProfile = () => {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="shad-form_label">Organization</FormLabel>
+                  <FormLabel className="shad-form_label">Unternehmen</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
@@ -148,7 +148,7 @@ const UpdateProfile = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="shad-form_label">Email</FormLabel>
+                  <FormLabel className="shad-form_label">E-Mail</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
@@ -167,7 +167,7 @@ const UpdateProfile = () => {
               name="bio"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="shad-form_label">Bio</FormLabel>
+                  <FormLabel className="shad-form_label">Biografie</FormLabel>
                   <FormControl>
                     <Textarea
                       className="shad-textarea custom-scrollbar"
@@ -184,14 +184,14 @@ const UpdateProfile = () => {
                 type="button"
                 className="shad-button_dark_4"
                 onClick={() => navigate(-1)}>
-                Cancel
+                Zurück
               </Button>
               <Button
                 type="submit"
                 className="shad-button_primary whitespace-nowrap"
                 disabled={isLoadingUpdate}>
                 {isLoadingUpdate && <Loader />}
-                Update Profile
+                Änderungen übernehmen
               </Button>
             </div>
           </form>

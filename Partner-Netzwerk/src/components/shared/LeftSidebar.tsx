@@ -118,7 +118,7 @@ const LeftSidebar = () => {
                     alt='logout'
                 />
                 <p className = 'small-medium lg:base-medium'> 
-                    Logout
+                    Abmelden
                 </p>
             </Button>
         </nav>

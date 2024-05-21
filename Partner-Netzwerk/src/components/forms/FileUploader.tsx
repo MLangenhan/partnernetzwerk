@@ -40,7 +40,7 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
           <div className='flex flex-1 justify-center w-full p-5 lg:p-10'>
             <img src={fileUrl} alt="image" className='file_uploader-img' /> {/* Display uploaded image */}
           </div>
-          <p className='file_uploader-label'>Click or drag photo to replace</p> {/* Instruction for replacing image */}
+          <p className='file_uploader-label'>Zum Ersetzem das Bild hier einfügen</p> {/* Instruction for replacing image */}
         </>
       ) : (
         <div className='file_uploader-box'> {/* Default content before file selection */}
@@ -50,9 +50,9 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
             height={77}
             alt='file-upload'
           />
-          <h3 className='base-medium text-light-2 mb-2 mt-6'>Drag Photo here</h3>
+          <h3 className='base-medium text-light-2 mb-2 mt-6'>Hier Bild einfügen</h3>
           <p className='text-light-4 small-regular mb-6'>SVG, PNG, JPG</p>
-          <Button className='shad-button_dark_4'>Select from Computer</Button> {/* Button for manual file selection */}
+          <Button className='shad-button_dark_4'>Datei auswählen</Button> {/* Button for manual file selection */}
         </div>
       )}
     </div>

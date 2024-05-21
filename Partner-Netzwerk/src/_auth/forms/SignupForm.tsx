@@ -96,10 +96,10 @@ const SignupForm = () => {
         <img src="/assets/images/Ecurie-Aix-Logo-blau.png" alt="logo" className="mb-10 size-18" />
 
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12 font-Univers_LT_Std_57">
-          Create a new account
+          Neues Konto erstellen
         </h2>
         <p className="text-ecurie-lightblue small-medium md:base-regular mt-2">
-          To use the network, Please enter your details
+          Bite geben Sie Ihre Daten an, um das Partnernetzwerk nutzen zu können
         </p>
 
         <form
@@ -120,10 +120,10 @@ const SignupForm = () => {
           />
 
           <FormItem>
-            <FormLabel className="shad-form_label">Role(s)</FormLabel>
+            <FormLabel className="shad-form_label">Rolle(n)</FormLabel>
             <DropdownMenu>
               <DropdownMenuTrigger className="bg-dark-4 text-left px-4 py-2 outline outline-2 rounded outline-dark-4 flex justify-between items-center w-full">
-                <span>{selectedRoles.length > 0 ? selectedRoles.join(', ') : 'Select roles'}</span>
+                <span>{selectedRoles.length > 0 ? selectedRoles.join(', ') : 'Rolle auswählen'}</span>
                 <span className="ml-2">⌄</span>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-dark-1 border-4 border-dark-4 w-full">
@@ -147,7 +147,7 @@ const SignupForm = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Organization</FormLabel>
+                <FormLabel className="shad-form_label">Unternehmen</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -161,7 +161,7 @@ const SignupForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Email</FormLabel>
+                <FormLabel className="shad-form_label">E-Mail</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -175,7 +175,7 @@ const SignupForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Password</FormLabel>
+                <FormLabel className="shad-form_label">Passwort</FormLabel>
                 <FormControl>
                   <Input type="password" className="shad-input" {...field} />
                 </FormControl>
@@ -190,16 +190,16 @@ const SignupForm = () => {
                 <Loader /> Loading...
               </div>
             ) : (
-              "Sign Up"
+              "Konto erstellen"
             )}
           </Button>
 
           <p className="text-small-regular text-light-2 text-center mt-2">
-            Already have an account?
+            Besitzen Sie bereits ein Konto?
             <Link
               to="/sign-in"
               className="text-primary-500 text-small-semibold ml-1">
-              Log in
+              Anmelden
             </Link>
           </p>
         </form>

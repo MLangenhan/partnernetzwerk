@@ -57,10 +57,10 @@ const SigninForm = () => {
         <img src="/assets/images/Ecurie-Aix-Logo-blau.png" alt="logo" className="mb-10 size-18"/>
 
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12 font-Univers_LT_Std_57">
-          Log in to your account
+          Willkommen zurück!
         </h2>
         <p className="text-ecurie-lightblue small-medium md:base-regular mt-2">
-          Welcome back! Please enter your details.
+          Bitte melden Sie sich mit einem vorhandenen Konto an
         </p>
         <form
           onSubmit={form.handleSubmit(handleSignin)}
@@ -70,7 +70,7 @@ const SigninForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Email</FormLabel>
+                <FormLabel className="shad-form_label">E-Mail</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -84,7 +84,7 @@ const SigninForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Password</FormLabel>
+                <FormLabel className="shad-form_label">Passwort</FormLabel>
                 <FormControl>
                   <Input type="password" className="shad-input" {...field} />
                 </FormControl>
@@ -99,16 +99,16 @@ const SigninForm = () => {
                 <Loader /> Loading...
               </div>
             ) : (
-              "Log in"
+              "Anmelden"
             )}
           </Button>
 
           <p className="text-small-regular text-light-2 text-center mt-2">
-            Don&apos;t have an account?
+            Noch kein Konto?
             <Link
               to="/sign-up"
               className="text-primary-500 text-small-semibold ml-1">
-              Sign up
+              Konto erstellen
             </Link>
           </p>
         </form>
