@@ -27,21 +27,16 @@ const LeftSidebar = () => {
         const role = user?.role[0] || '';
         if (role === 'E') {
             setNameColor('text-ecurie-lightblue');
-            console.log(user.role[0])
         } else if (role === 'A') {
-            console.log(user.role[0])
             setNameColor('text-ecurie-babyblue');
         } else if (role === 'S'){
             setNameColor('text-ecurie-red'); 
-            console.log(user.role[0])
         }
         else if (role === 'M'){
             setNameColor('text-ecurie-darkred');
-            console.log(user.role[0])
         }
         else {
             setNameColor('text-black');
-            console.log(user.role[0])
         }
     }, [user]);
 

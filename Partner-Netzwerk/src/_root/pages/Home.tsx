@@ -1,28 +1,81 @@
+// Import Loader, PostCard, useGetRecentPosts, useGetUsers, Models, React, gapi, Event, and googleConfig
 import Loader from '@/components/shared/Loader';
 import PostCard from '@/components/shared/PostCard';
-import UserCard from '@/components/shared/UserCard';
 import { useGetRecentPosts, useGetUsers } from '@/lib/react-query/queriesAndMutations';
 import { Models } from 'appwrite';
+import React, { useEffect, useState } from 'react';
+import { gapi } from 'gapi-script';
+import Event from '@/components/shared/Event';
+import { googleConfig, appwriteConfig } from "@/lib/appwrite/config";
 
-import VideoBgSS from "/assets/videos/subwaysurfer.mp4"
+// Define EventProps interface
+interface EventProps {
+  id: string;
+  summary: string;
+  start: {
+    dateTime: string;
+  };
+}
 
-
-
-
-
-const Home = () => {
-  // const { toast } = useToast();
-
+// Define Home component
+const Home: React.FC = () => {
   const {
     data: posts,
     isLoading: isPostLoading,
     isError: isErrorPosts,
   } = useGetRecentPosts();
+
   const {
     data: creators,
     isLoading: isUserLoading,
     isError: isErrorCreators,
   } = useGetUsers(12);
+
+  const [events, setEvents] = useState<EventProps[]>([]);
+
+  const calendarID = googleConfig.calendarId;
+  const apiKey = googleConfig.apiKey;
+  const url = appwriteConfig.url;
+
+  const getEvents = (calendarID: string, apiKey: string): void => {
+    function initiate() {
+      console.log("Initializing Google API Client...");
+      gapi.client
+        .init({
+          apiKey: apiKey,
+        })
+        .then(() => {
+          console.log("Google API Client initialized successfully");
+          return gapi.client.request({
+            path: `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
+          });
+        })
+        .then(
+          (response: any) => {
+            const events = response.result.items;
+            console.log("Fetched Events:", events);  // Log the fetched events for debugging
+            setEvents(events);
+          },
+          (err: any) => {
+            console.error("Error fetching events:", err);  // Log any errors
+          }
+        );
+    }
+    console.log("Loading Google API Client library...");
+    gapi.load('client:auth2', initiate);
+  };
+
+  useEffect(() => {
+    console.log("Calendar ID:", calendarID);
+    console.log("API Key:", apiKey);
+    console.log("URL Key:", url);
+    if (calendarID && apiKey) {
+      console.log("Initializing Google API Client with", { calendarID, apiKey });
+      getEvents(calendarID, apiKey);
+    } else {
+      console.error("Missing required environment variables");
+    }
+  }, [calendarID, apiKey]);
 
   if (isErrorPosts || isErrorCreators) {
     return (
@@ -37,6 +90,12 @@ const Home = () => {
     );
   }
 
+  // Filter out events that are past the current date
+  const filteredEvents = events.filter((event) => {
+    const eventDate = new Date(event.start.dateTime);
+    return eventDate >= new Date(); // Only include events that are after the current date
+  });
+
   return (
     <div className="flex flex-1">
       <div className="home-container">
@@ -45,7 +104,7 @@ const Home = () => {
           {isPostLoading && !posts ? (
             <Loader />
           ) : (
-            <ul className="flex flex-col flex-1 gap-9 w-full ">
+            <ul className="flex flex-col flex-1 gap-9 w-full">
               {posts?.documents.map((post: Models.Document) => (
                 <li key={post.$id} className="flex justify-center w-full">
                   <PostCard post={post} />
@@ -57,13 +116,19 @@ const Home = () => {
       </div>
 
       <div className="home-creators">
-        <video 
-            src={VideoBgSS} 
-            autoPlay 
-            loop 
-            muted 
-            className="object-cover"
-          />
+        <h2 className="h3-bold md:h2-bold text-left w-full">Events</h2>
+        {events.length === 0 ? (
+          <p className="text-light-1">No events found.</p>
+        ) : (
+          <ul>
+            {filteredEvents.map((event) => (
+              <li key={event.id} className="">
+                {/* Pass summary and start props to Event component */}
+                <Event summary={event.summary} start={event.start} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

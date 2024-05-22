@@ -20,6 +20,9 @@ import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
 const App = () => {
+
+  console.log("Environment Variables:", import.meta.env.REACT_APP_CALENDAR_ID, import.meta.env.REACT_APP_GOOGLE_API_KEY, import.meta.env.REACT_APP_GOOGLE_CLIENT_ID);
+
   return (
     <main className="flex h-screen">
       <Routes>

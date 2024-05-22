@@ -18,9 +18,6 @@ const PostCard = ({ post }: PostCardProps) => {
 
   // Extract the role, ensuring it's a string
   const role = post.creator.role && post.creator.role.length > 0 ? post.creator.role[0] : '';
-  
-  // Debug: Log the resolved role
-  console.log('resolved role:', role);
 
   const nameColor = getNameColor(role);
 

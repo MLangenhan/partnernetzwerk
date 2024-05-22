@@ -12,6 +12,14 @@ export const appwriteConfig = {
   savesCollectionId: import.meta.env.VITE_APPWRITE_SAVES_COLLECTION_ID, // ID of the saves collection (if applicable)
 };
 
+export const googleConfig = {
+  apiKey: import.meta.env.VITE_APPWRITE_GOOGLE_API_KEY,
+  calendarId: import.meta.env.VITE_APPWRITE_CALENDAR_ID,
+};
+
+console.log("Key:", googleConfig.apiKey)
+console.log("URL:", appwriteConfig.url)
+
 // Create a new Appwrite client instance
 export const client = new Client();
 
