@@ -4,6 +4,8 @@ import UserCard from '@/components/shared/UserCard';
 import { useGetRecentPosts, useGetUsers } from '@/lib/react-query/queriesAndMutations';
 import { Models } from 'appwrite';
 
+import VideoBgSS from "/assets/videos/subwaysurfer.mp4"
+
 
 
 
@@ -20,7 +22,7 @@ const Home = () => {
     data: creators,
     isLoading: isUserLoading,
     isError: isErrorCreators,
-  } = useGetUsers(10);
+  } = useGetUsers(12);
 
   if (isErrorPosts || isErrorCreators) {
     return (
@@ -55,18 +57,13 @@ const Home = () => {
       </div>
 
       <div className="home-creators">
-        <h3 className="h3-bold text-light-1">Top Creators</h3>
-        {isUserLoading && !creators ? (
-          <Loader />
-        ) : (
-          <ul className="grid 2xl:grid-cols-2 gap-6">
-            {creators?.documents.map((creator) => (
-              <li key={creator?.$id}>
-                <UserCard user={creator} />
-              </li>
-            ))}
-          </ul>
-        )}
+        <video 
+            src={VideoBgSS} 
+            autoPlay 
+            loop 
+            muted 
+            className="object-cover"
+          />
       </div>
     </div>
   );
