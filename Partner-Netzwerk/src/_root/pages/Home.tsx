@@ -1,7 +1,7 @@
 // Import Loader, PostCard, useGetRecentPosts, useGetUsers, Models, React, gapi, Event, and googleConfig
 import Loader from '@/components/shared/Loader';
 import PostCard from '@/components/shared/PostCard';
-import { useGetRecentPosts, useGetUsers } from '@/lib/react-query/queriesAndMutations';
+import { useGetRecentPosts } from '@/lib/react-query/queriesAndMutations';
 import { Models } from 'appwrite';
 import React, { useEffect, useState } from 'react';
 import { gapi } from 'gapi-script';
@@ -17,19 +17,14 @@ interface EventProps {
   };
 }
 
+type MediaType = 'image' | 'pdf' | 'video'; // Define MediaType
+
 // Define Home component
 const Home: React.FC = () => {
   const {
     data: posts,
     isLoading: isPostLoading,
-    isError: isErrorPosts,
   } = useGetRecentPosts();
-
-  const {
-    data: creators,
-    isLoading: isUserLoading,
-    isError: isErrorCreators,
-  } = useGetUsers(12);
 
   const [events, setEvents] = useState<EventProps[]>([]);
 
@@ -39,13 +34,11 @@ const Home: React.FC = () => {
 
   const getEvents = (calendarID: string, apiKey: string): void => {
     function initiate() {
-      console.log("Initializing Google API Client...");
       gapi.client
         .init({
           apiKey: apiKey,
         })
         .then(() => {
-          console.log("Google API Client initialized successfully");
           return gapi.client.request({
             path: `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
           });
@@ -53,7 +46,6 @@ const Home: React.FC = () => {
         .then(
           (response: any) => {
             const events = response.result.items;
-            console.log("Fetched Events:", events);  // Log the fetched events for debugging
             setEvents(events);
           },
           (err: any) => {
@@ -61,34 +53,16 @@ const Home: React.FC = () => {
           }
         );
     }
-    console.log("Loading Google API Client library...");
     gapi.load('client:auth2', initiate);
   };
 
   useEffect(() => {
-    console.log("Calendar ID:", calendarID);
-    console.log("API Key:", apiKey);
-    console.log("URL Key:", url);
     if (calendarID && apiKey) {
-      console.log("Initializing Google API Client with", { calendarID, apiKey });
       getEvents(calendarID, apiKey);
     } else {
       console.error("Missing required environment variables");
     }
   }, [calendarID, apiKey]);
-
-  if (isErrorPosts || isErrorCreators) {
-    return (
-      <div className="flex flex-1">
-        <div className="home-container">
-          <p className="body-medium text-light-1">Something bad happened</p>
-        </div>
-        <div className="home-creators">
-          <p className="body-medium text-light-1">Something bad happened</p>
-        </div>
-      </div>
-    );
-  }
 
   // Filter out events that are past the current date
   const filteredEvents = events.filter((event) => {
@@ -107,6 +81,7 @@ const Home: React.FC = () => {
             <ul className="flex flex-col flex-1 gap-9 w-full">
               {posts?.documents.map((post: Models.Document) => (
                 <li key={post.$id} className="flex justify-center w-full">
+                  {/* Pass the media type to PostCard */}
                   <PostCard post={post} />
                 </li>
               ))}
@@ -117,7 +92,7 @@ const Home: React.FC = () => {
 
       <div className="home-creators">
         <h2 className="h3-bold md:h2-bold text-left w-full">Events</h2>
-        {events.length === 0 ? (
+        {filteredEvents.length === 0 ? (
           <p className="text-light-1">No events found.</p>
         ) : (
           <ul>

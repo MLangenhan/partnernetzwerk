@@ -17,9 +17,6 @@ export const googleConfig = {
   calendarId: import.meta.env.VITE_APPWRITE_CALENDAR_ID,
 };
 
-console.log("Key:", googleConfig.apiKey)
-console.log("URL:", appwriteConfig.url)
-
 // Create a new Appwrite client instance
 export const client = new Client();
 

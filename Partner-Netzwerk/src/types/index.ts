@@ -35,6 +35,7 @@ export type INewPost = {
     file: File[]; // Files to upload for the post content
     location?: string; // Optional location for the post
     tags?: string; // Optional tags for the post
+    mimeType: string;
   };
   
   // This type defines the data required to update an existing post
@@ -46,6 +47,7 @@ export type IUpdatePost = {
     file: File[]; // Files to upload for the post content (optional)
     location?: string; // Optional updated location for the post
     tags?: string; // Optional updated tags for the post
+    mimeType: string;
   };
   
   // This type defines the structure of a user object

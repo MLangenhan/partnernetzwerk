@@ -38,6 +38,14 @@ const PostDetails = () => {
 
   const nameColor = getNameColor(role);
 
+  const fileUrl = post?.imageUrl;
+  const mimeType = post?.mimeType;
+
+  // Determine the file type from the mimeType
+  const isImage = mimeType && mimeType.startsWith('image/');
+  const isVideo = mimeType && mimeType.startsWith('video/');
+  const isPDF = mimeType && mimeType === 'application/pdf';
+
   // Filter out empty strings from tags
   const filteredTags = post?.tags.filter((tag: string) => tag.trim() !== '');
 
@@ -63,11 +71,34 @@ const PostDetails = () => {
       ) : (
         <div className="post_details-card">
           <a href={post?.imageUrl} target="_blank" className="w-1/2">
-            <img
-              src={post?.imageUrl}
-              alt="creator"
-              className="file_uploader-img"
-            />
+            {isImage && (
+              <img
+                src={fileUrl}
+                alt="post image"
+                className="file_uploader-img"
+              />
+            )}
+            {isVideo && (
+              <video controls className="file_uploader-img">
+                <source src={fileUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+            {isPDF && (
+              <embed
+                src={fileUrl}
+                width="100%"
+                height="500px"
+                type="application/pdf"
+                className="file_uploader-img"
+              />
+            )}
+            {/* Default fallback for other file types */}
+            {!isImage && !isVideo && !isPDF && (
+              <div className="post-card_fallback">
+                <p>Unsupported file type</p>
+              </div>
+            )}
           </a>
           <div className="post_details-info">
             <div className="flex-between w-full">
@@ -131,22 +162,22 @@ const PostDetails = () => {
             <hr className="border w-full border-dark-4/80" />
 
             {/* Post Content Section */}
-              <div className="small-medium lg:base-medium py-5">
-                <p>{post.caption}</p>
-                {filteredTags.length > 0 && (
-                  <ul className="flex gap-1 mt-2">
-                    {filteredTags.map((tag: string, index: number) => (
-                      <li key={`${tag}${index}`} className="text-ecurie-blue small-regular">
-                        #{tag}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+            <div className="small-medium lg:base-medium py-5">
+              <p>{post.caption}</p>
+              {filteredTags.length > 0 && (
+                <ul className="flex gap-1 mt-2">
+                  {filteredTags.map((tag: string, index: number) => (
+                    <li key={`${tag}${index}`} className="text-ecurie-blue small-regular">
+                      #{tag}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
-              <div className="w-full">
-                <PostStats post={post} userId={user.id} />
-              </div>
+            <div className="w-full">
+              <PostStats post={post} userId={user.id} />
+            </div>
           </div>
         </div>
       )}

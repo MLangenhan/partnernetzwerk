@@ -14,18 +14,6 @@ import GridPostList from "@/components/shared/GridPostList";
 import Loader from "@/components/shared/Loader";
 import { getNameColor } from "@/lib/utils";
 
-interface StabBlockProps {
-  value: string | number;
-  label: string;
-}
-
-const StatBlock = ({ value, label }: StabBlockProps) => (
-  <div className="flex-center gap-2">
-    <p className="small-semibold lg:body-bold text-ecurie-blue">{value}</p>
-    <p className="small-medium lg:base-medium text-light-2">{label}</p>
-  </div>
-);
-
 const Profile = () => {
   const { id } = useParams();
   const { user } = useUserContext();
@@ -35,13 +23,7 @@ const Profile = () => {
 
   const role = currentUser?.role && currentUser.role.length > 0 ? currentUser.role[0] : '';
 
-  console.log("role:", role)
-
   const nameColor = getNameColor(role);
-
-  console.log(nameColor)
-  console.log(currentUser)
-  console.log(user)
 
   var linkedInUrl: string
 
@@ -111,27 +93,20 @@ const Profile = () => {
                 </p>
               </div>
               <div className="flex-left pt-2 pr-64">
-                <div>
-                  {currentUser.linkedin !== '' && currentUser.linkedin !== null && (
-                    <a href={linkedInUrl} target="_blank" className="h-8 bg-dark-4 text-light-1 flex items-center rounded-lg px-2 w-fit">
-                      <img
-                        src="/assets/icons/linkedin-icon.svg"
-                        alt="linkedin"
-                        width={20}
-                        height={20}
-                        className="mr-2"
-                      />
-                      <p>
-                        |
-                      </p>
-                      <p className="pt-1 pl-2">
-                        {currentUser.name}
-                      </p>
-                    </a>
-                  )}
-                </div>
+                {currentUser.linkedin !== '' && currentUser.linkedin !== null && (
+                  <a href={linkedInUrl} target="_blank" className="h-8 bg-dark-4 text-light-1 flex items-center rounded-lg px-2 w-fit">
+                    <img
+                      src="/assets/icons/linkedin-icon.svg"
+                      alt="linkedin"
+                      width={20}
+                      height={20}
+                      className="mr-2"
+                    />
+                    <span>|</span>
+                    <span className="pt-1 pl-2">{currentUser.name}</span>
+                  </a>
+                )}
               </div>
-
             </div>
 
             {/*   <div className="flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20">
@@ -168,7 +143,7 @@ const Profile = () => {
         </div>
       </div>
       <div className="border-t border-white w-6/12 my-4"></div>
-            
+
       {currentUser.$id === user.id && (
         <div className="flex max-w-5xl w-full">
           <Link

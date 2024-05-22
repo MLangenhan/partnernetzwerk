@@ -24,11 +24,30 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
       {posts.map((post) => (
         <li key={post.$id} className='relative min-w-8- h-80'>
           <Link to={`/posts/${post.$id}`} className='grid-post_link'>
-            <img
-              src={post.imageUrl}
-              alt='post'
-              className='h-full w-full object-cover'
-            />
+            {post.mimeType.startsWith('image/') && ( // Check if MIME type starts with 'image/'
+              <img
+                src={post.imageUrl}
+                alt="post image"
+                className="h-full w-full object-cover"
+              />
+            )}
+            {post.mimeType.startsWith('video/') && ( // Check if MIME type starts with 'video/'
+              <video controls className="file_uploader-img">
+                <source src={post.imageUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+            {post.mimeType === 'application/pdf' && ( // Check if MIME type is 'application/pdf'
+              <a href={`/posts/${post.$id}`} target="_blank" rel="noopener noreferrer">
+                <embed
+                  src={post.imageUrl}
+                  width="100%"
+                  height="500px"
+                  type="application/pdf"
+                  className="file_uploader-img"
+                />
+              </a>
+            )}
           </Link>
 
           <div className='grid-post_user'>
@@ -38,7 +57,7 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
                 <img
                   src={post.creator.imageUrl}
                   alt='creator'
-                  className='h-8 w-8 rounded-full'
+                  className='h-8 w-8 rounded-full object-cover'
                 />
                 <p className='line-clamp-1'> {/* Truncate username to one line */} </p>
               </div>

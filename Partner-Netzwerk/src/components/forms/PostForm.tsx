@@ -54,6 +54,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
                 postId: post.$id,
                 imageId: post?.imageId,
                 imageUrl: post.ImageUrl,
+                mimeType: post.mimeType,
             })
 
             if(!updatedPost){
@@ -66,6 +67,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
         const newPost = await createPost({
             ...values,
             userId: user.id,
+            mimeType: post?.mimeType,
         })
 
         if(!newPost) {

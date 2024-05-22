@@ -4,7 +4,6 @@ import PostStats from "@/components/shared/PostStats"; // Import PostStats compo
 import { multiFormatDateString, getNameColor } from "@/lib/utils"; // Import date formatting function
 import { useUserContext } from "@/context/AuthContext"; // Import user context hook
 
-
 // Define props interface for PostCard component
 type PostCardProps = {
   post: Models.Document; // Type the post prop as an Appwrite Document
@@ -23,6 +22,15 @@ const PostCard = ({ post }: PostCardProps) => {
 
   // Filter out empty strings from tags
   const filteredTags = post.tags.filter((tag: string) => tag.trim() !== '');
+
+  // Get the file URL and mimeType from the post
+  const fileUrl = post.imageUrl;
+  const mimeType = post.mimeType;
+
+  // Determine the file type from the mimeType
+  const isImage = mimeType && mimeType.startsWith('image/');
+  const isVideo = mimeType && mimeType.startsWith('video/');
+  const isPDF = mimeType && mimeType === 'application/pdf';
 
   return (
     <div className="post-card">
@@ -84,11 +92,35 @@ const PostCard = ({ post }: PostCardProps) => {
           )}
         </div>
 
-        <img
-          src={post.imageUrl || "/assets/icons/profile-placeholder.svg"}
-          alt="post image"
-          className="post-card_img"
-        />
+        {/* Render content based on mimeType */}
+        {isImage && (
+          <img
+            src={fileUrl}
+            alt="post image"
+            className="post-card_img"
+          />
+        )}
+        {isVideo && (
+          <video controls className="post-card_img">
+            <source src={fileUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
+        {isPDF && (
+          <embed
+            src={fileUrl}
+            width="100%"
+            height="500px"
+            type="application/pdf"
+            className="post-card_pdf"
+          />
+        )}
+        {/* Default fallback for other file types */}
+        {!isImage && !isVideo && !isPDF && (
+          <div className="post-card_fallback">
+            <p>Unsupported file type</p>
+          </div>
+        )}
       </Link>
 
       {/* Post Stats Section */}

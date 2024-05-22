@@ -37,6 +37,15 @@ export async function createUserAccount(user: INewUser) {
   }
 }
 
+export async function getFileById(post: IUpdatePost){
+  const result = await storage.getFile(
+    appwriteConfig.storageId,
+    post.imageId,
+  )
+
+  return result
+}
+
 // ============================== SAVE USER TO DB
 export async function saveUserToDB(user: {
   accountId: string;
@@ -160,8 +169,11 @@ export async function createPost(post: INewPost) {
         imageId: uploadedFile.$id,
         location: post.location,
         tags: tags,
+        mimeType: uploadedFile.mimeType,
       }
     );
+
+    console.log("Post:", newPost)
 
     if (!newPost) {
       await deleteFile(uploadedFile.$id);
@@ -204,6 +216,7 @@ export function getFilePreview(fileId: string) {
     console.log(error);
   }
 }
+
 
 // ============================== DELETE FILE
 export async function deleteFile(fileId: string) {
@@ -313,6 +326,7 @@ export async function updatePost(post: IUpdatePost) {
         imageId: image.imageId,
         location: post.location,
         tags: tags,
+        mimeType: post.mimeType,
       }
     );
 
