@@ -12,6 +12,7 @@
 	npm i @tanstack/react-query
 	npm install react-dropzone
 	npm install react-intersection-observer
+	npm install gapi-script
 
 4. To host the website locally
 	npm run dev
