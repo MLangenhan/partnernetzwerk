@@ -110,29 +110,29 @@ const Profile = () => {
                   {currentUser.email}
                 </p>
               </div>
-              <div className="flex-left pt-2 pr-64 ">
-                <div className="">
+              <div className="flex-left pt-2 pr-64">
+                <div>
                   {currentUser.linkedin !== '' && currentUser.linkedin !== null && (
-                    <>
-                      <a href={linkedInUrl} target="_blank" className="h-8 bg-dark-4 text-light-1 flex-center gap-2 rounded-lg px-2">
-                        <img
-                          src={"/assets/icons/linkedin-icon.svg"}
-                          alt="linkedin"
-                          width={20}
-                          height={20}
-                          className=""
-                        />
-                        <p>
-                          | {currentUser.name}
-                        </p>
-                      </a>
-                    </>
+                    <a href={linkedInUrl} target="_blank" className="h-8 bg-dark-4 text-light-1 flex items-center rounded-lg px-2 w-fit">
+                      <img
+                        src="/assets/icons/linkedin-icon.svg"
+                        alt="linkedin"
+                        width={20}
+                        height={20}
+                        className="mr-2"
+                      />
+                      <p>
+                        |
+                      </p>
+                      <p className="pt-1 pl-2">
+                        {currentUser.name}
+                      </p>
+                    </a>
                   )}
                 </div>
               </div>
+
             </div>
-
-
 
             {/*   <div className="flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20">
               <StatBlock value={currentUser.posts.length} label="Posts" />
@@ -167,7 +167,8 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
+      <div className="border-t border-white w-6/12 my-4"></div>
+            
       {currentUser.$id === user.id && (
         <div className="flex max-w-5xl w-full">
           <Link
@@ -196,7 +197,6 @@ const Profile = () => {
           </Link>
         </div>
       )}
-
       <Routes>
         <Route
           index
