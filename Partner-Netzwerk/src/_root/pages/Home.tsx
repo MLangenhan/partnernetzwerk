@@ -64,11 +64,17 @@ const Home: React.FC = () => {
     }
   }, [calendarID, apiKey]);
 
-  // Filter out events that are past the current date
-  const filteredEvents = events.filter((event) => {
-    const eventDate = new Date(event.start.dateTime);
-    return eventDate >= new Date(); // Only include events that are after the current date
-  });
+  // Filter out events that are past the current date and sort them by date
+  const filteredEvents = events
+    .filter((event) => {
+      const eventDate = new Date(event.start.dateTime);
+      return eventDate >= new Date(); // Only include events that are after the current date
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.start.dateTime).getTime();
+      const dateB = new Date(b.start.dateTime).getTime();
+      return dateA - dateB; // Sort by date in ascending order
+    });
 
   return (
     <div className="flex flex-1">
@@ -91,9 +97,9 @@ const Home: React.FC = () => {
       </div>
 
       <div className="home-creators">
-        <h2 className="h3-bold md:h2-bold text-left w-full">Events</h2>
+        <h2 className="h3-bold md:h2-bold text-left w-full">Anstehende Events</h2>
         {filteredEvents.length === 0 ? (
-          <p className="text-light-1">No events found.</p>
+          <p className="text-light-1">Bisher stehen keine Events an.</p>
         ) : (
           <ul>
             {filteredEvents.map((event) => (

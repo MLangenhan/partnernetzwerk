@@ -91,37 +91,37 @@ const PostCard = ({ post }: PostCardProps) => {
             </ul>
           )}
         </div>
-
-        {/* Render content based on mimeType */}
-        {isImage && (
-          <img
-            src={fileUrl}
-            alt="post image"
-            className="post-card_img"
-          />
-        )}
-        {isVideo && (
-          <video controls className="post-card_img">
-            <source src={fileUrl} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        )}
-        {isPDF && (
-          <embed
-            src={fileUrl}
-            width="100%"
-            height="500px"
-            type="application/pdf"
-            className="post-card_pdf"
-          />
-        )}
-        {/* Default fallback for other file types */}
-        {!isImage && !isVideo && !isPDF && (
-          <div className="post-card_fallback">
-            <p>Unsupported file type</p>
-          </div>
-        )}
       </Link>
+      {/* Render content based on mimeType */}
+      {isImage && (
+        <img
+          src={fileUrl}
+          alt="post image"
+          className="post-card_img"
+        />
+      )}
+      {isVideo && (
+        <video controls autoPlay muted loop preload="true" className="post-card_img"> 
+          <source src={fileUrl} type="video/mp4" />
+          Dieser Datei-Typ wird von deinem Browser leider nicht unterstützt.
+        </video>
+      )}
+      {isPDF && (
+        <embed
+          src={fileUrl}
+          width="100%"
+          height="500px"
+          type="application/pdf"
+          className="post-card_pdf"
+        />
+      )}
+      {/* Default fallback for other file types */}
+      {!isImage && !isVideo && !isPDF && (
+        <div className="post-card_fallback">
+          <p>Dieser Datei-Typ wird leider nicht unterstützt.</p>
+        </div>
+      )}
+
 
       {/* Post Stats Section */}
       <PostStats post={post} userId={user.id} />
