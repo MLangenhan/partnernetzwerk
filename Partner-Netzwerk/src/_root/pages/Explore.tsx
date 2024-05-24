@@ -1,18 +1,24 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-
 import { Input } from "@/components/ui/input";
 import useDebounce from "@/hooks/useDebounce";
 import Loader from "@/components/shared/Loader";
 import GridPostList from "@/components/shared/GridPostList";
 import { useGetPosts, useSearchPosts } from "@/lib/react-query/queriesAndMutations";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuCheckboxItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export type SearchResultProps = {
   isSearchFetching: boolean;
   searchedPosts: any;
 };
 
-const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultProps) => {
+const SearchResults: React.FC<SearchResultProps> = ({ isSearchFetching, searchedPosts }) => {
   if (isSearchFetching) {
     return <Loader />;
   } else if (searchedPosts && searchedPosts.documents.length > 0) {
@@ -24,10 +30,11 @@ const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultProps) =
   }
 };
 
-const Explore = () => {
+
+const Explore: React.FC = () => {
   const { ref, inView } = useInView();
   const { data: posts, fetchNextPage, hasNextPage } = useGetPosts();
-
+  const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearch = useDebounce(searchValue, 500);
   const { data: searchedPosts, isFetching: isSearchFetching } = useSearchPosts(debouncedSearch);
@@ -38,16 +45,39 @@ const Explore = () => {
     }
   }, [inView, searchValue]);
 
-  if (!posts)
+  const handleRoleChange = (role: string) => {
+    // Toggle the selection of the role
+    if (selectedRoles.includes(role)) {
+      setSelectedRoles(selectedRoles.filter(r => r !== role));
+    } else {
+      setSelectedRoles([...selectedRoles, role]);
+    }
+  };
+
+  const filterPostsByRoles = (posts: any[]) => {
+    if (selectedRoles.length === 0) {
+      return posts;
+    }
+
+    // Filter posts based on selected roles
+    return posts.filter(post => {
+      // Check if any selected role matches the post creator's role
+      return selectedRoles.some(selectedRole => post.creator.role.includes(selectedRole));
+    });
+  };
+
+  if (!posts) {
     return (
       <div className="flex-center w-full h-full">
         <Loader />
       </div>
     );
+  }
 
   const shouldShowSearchResults = searchValue !== "";
-  const shouldShowPosts = !shouldShowSearchResults && 
-    posts.pages.every((item) => item?.documents.length === 0);
+  const shouldShowPosts = !shouldShowSearchResults &&
+    posts.pages.every((item) => item.documents.length === 0);
+
 
   return (
     <div className="explore-container">
@@ -62,28 +92,43 @@ const Explore = () => {
           />
           <Input
             type="text"
-            placeholder="Search"
+            placeholder="Suchen"
             className="explore-search"
             value={searchValue}
-            onChange={(e) => {
-              const { value } = e.target;
-              setSearchValue(value);
-            }}
+            onChange={(e) => setSearchValue(e.target.value)}
           />
         </div>
       </div>
 
       <div className="flex-between w-full max-w-5xl mt-16 mb-7">
         <h3 className="body-bold md:h3-bold">Beliebt</h3>
+        <div className="flex-center gap-3 rounded-xl px-4 py-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="text-left bg-dark-3 rounded-xl gap-2 px-4 py-2 flex justify-between items-center w-full">
+              <span>{selectedRoles.length > 0 ? selectedRoles.join(', ') : 'Nach Rolle sortieren'}</span>
+              <img
+                src="/assets/icons/filter.svg"
+                width={20}
+                height={20}
+                alt="filter"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-dark-1 border-4 border-dark-4 w-full">
+              {["Ecurie-Aix", "Alumni", "Partner", "Hersteller"].map(role => (
+                <DropdownMenuCheckboxItem
+                  key={role}
+                  checked={selectedRoles.includes(role)}
+                  onCheckedChange={() => handleRoleChange(role)}
+                  className="hover:bg-ecurie-babyblue"
+                >
+                  {role}
+                </DropdownMenuCheckboxItem>
+              ))}
 
-        <div className="flex-center gap-3 bg-dark-3 rounded-xl px-4 py-2 cursor-pointer">
-          <p className="small-medium md:base-medium text-light-2">Alle</p>
-          <img
-            src="/assets/icons/filter.svg"
-            width={20}
-            height={20}
-            alt="filter"
-          />
+            </DropdownMenuContent>
+
+          </DropdownMenu>
+
         </div>
       </div>
 
@@ -96,8 +141,8 @@ const Explore = () => {
         ) : shouldShowPosts ? (
           <p className="text-light-4 mt-10 text-center w-full">Ende der Beiträge</p>
         ) : (
-          posts.pages.map((item, index) => (
-            <GridPostList key={`page-${index}`} posts={item?.documents} />
+          posts.pages.map((page: any, index: number) => (
+            <GridPostList key={`page-${index}`} posts={filterPostsByRoles(page.documents)} />
           ))
         )}
       </div>

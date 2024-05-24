@@ -68,9 +68,9 @@ export const getNameColor = (role: string) => {
       return 'text-ecurie-lightblue';
     case 'Alumni':
       return 'text-ecurie-babyblue';
-    case 'Sponsor':
+    case 'Partner':
       return 'text-ecurie-red';
-    case 'Manufacturer':
+    case 'Hersteller':
       return 'text-ecurie-darkred';
     default:
       return 'text-ecurie-lightblue';

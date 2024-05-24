@@ -29,10 +29,10 @@ const LeftSidebar = () => {
             setNameColor('text-ecurie-lightblue');
         } else if (role === 'A') {
             setNameColor('text-ecurie-babyblue');
-        } else if (role === 'S'){
+        } else if (role === 'P'){
             setNameColor('text-ecurie-red'); 
         }
-        else if (role === 'M'){
+        else if (role === 'H'){
             setNameColor('text-ecurie-darkred');
         }
         else {

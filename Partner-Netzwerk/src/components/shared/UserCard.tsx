@@ -17,6 +17,9 @@ const UserCard = ({ user }: UserCardProps) => {
 
   const nameColor = getNameColor(role);
 
+  console.log(nameColor)
+  console.log(role)
+
   return (
     <Link to={userProfileLink} className="user-card">
       {/* Display user profile picture */}

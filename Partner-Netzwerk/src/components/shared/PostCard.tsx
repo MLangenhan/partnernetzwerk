@@ -109,10 +109,8 @@ const PostCard = ({ post }: PostCardProps) => {
       {isPDF && (
         <embed
           src={fileUrl}
-          width="100%"
-          height="500px"
           type="application/pdf"
-          className="post-card_pdf"
+          className="post-card_img"
         />
       )}
       {/* Default fallback for other file types */}

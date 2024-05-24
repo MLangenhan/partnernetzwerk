@@ -20,7 +20,7 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
   const { user } = useUserContext();
 
   return (
-    <ul className='grid-container'>
+    <ul className='grid-container hover:outline-2'>
       {posts.map((post) => (
         <li key={post.$id} className='relative min-w-8- h-80'>
           <Link to={`/posts/${post.$id}`} className='grid-post_link'>
@@ -32,13 +32,13 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
               />
             )}
             {post.mimeType.startsWith('video/') && ( // Check if MIME type starts with 'video/'
-              <video controls className="file_uploader-img">
+              <video controls className="file_uploader-img m-0 pb-40 block">
                 <source src={post.imageUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             )}
             {post.mimeType === 'application/pdf' && ( // Check if MIME type is 'application/pdf'
-              <a href={`/posts/${post.$id}`} target="_blank" rel="noopener noreferrer">
+              <a className='pl-2.5' href={`/posts/${post.$id}`} target="_blank" rel="noopener noreferrer">
                 <embed
                   src={post.imageUrl}
                   width="100%"
@@ -50,10 +50,10 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
             )}
           </Link>
 
-          <div className='grid-post_user'>
+          <div className='bg-dark-4 z-40 h-14 grid-post_user'>
             {/* Conditionally render user info based on showUser prop */}
             {showUser && (
-              <div className='flex items-center justify-start gap-2 flex-1'>
+              <div className='flex items-center justify-start gap-2 flex-1 z-50'>
                 <img
                   src={post.creator.imageUrl}
                   alt='creator'
@@ -63,6 +63,7 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
               </div>
             )}
             {/* Conditionally render PostStats component based on showStats prop */}
+
             {showStats && <PostStats post={post} userId={user.id} />}
           </div>
         </li>
