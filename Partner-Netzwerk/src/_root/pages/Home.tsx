@@ -17,8 +17,6 @@ interface EventProps {
   };
 }
 
-type MediaType = 'image' | 'pdf' | 'video'; // Define MediaType
-
 // Define Home component
 const Home: React.FC = () => {
   const {

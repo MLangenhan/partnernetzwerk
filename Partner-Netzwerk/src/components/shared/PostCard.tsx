@@ -101,7 +101,7 @@ const PostCard = ({ post }: PostCardProps) => {
         />
       )}
       {isVideo && (
-        <video controls autoPlay muted loop preload="true" className="post-card_img"> 
+        <video controls className="post-card_img"> 
           <source src={fileUrl} type="video/mp4" />
           Dieser Datei-Typ wird von deinem Browser leider nicht unterstützt.
         </video>
