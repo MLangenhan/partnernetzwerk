@@ -369,8 +369,8 @@ export async function updatePost(post: IUpdatePost) {
 }
 
 // ============================== DELETE POST
-export async function deletePost(postId?: string, imageId?: string) {
-  if (!postId || !imageId) return;
+export async function deletePost(postId?: string, imageId?: string): Promise<{ status: string }> {
+  if (!postId || !imageId) throw new Error("Invalid parameters.");
 
   try {
     const statusCode = await databases.deleteDocument(
@@ -379,13 +379,14 @@ export async function deletePost(postId?: string, imageId?: string) {
       postId
     );
 
-    if (!statusCode) throw Error;
+    if (!statusCode) throw new Error("Failed to delete document.");
 
     await deleteFile(imageId);
 
     return { status: "Ok" };
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    throw error;
   }
 }
 

@@ -1,4 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
@@ -14,24 +15,54 @@ import {
 import { multiFormatDateString, getNameColor } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
 
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+import { useToast } from "@/components/ui/use-toast";
+
+
+
 const PostDetails = () => {
+  const { toast } = useToast();
+  const deletePostMutation = useDeletePost();
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useUserContext();
-
+  const [isDeleting, setIsDeleting] = useState(false);
   const { data: post, isLoading } = useGetPostById(id);
   const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
     post?.creator.$id
   );
-  const { mutate: deletePost } = useDeletePost();
+ 
 
   const relatedPosts = userPosts?.documents.filter(
     (userPost) => userPost.$id !== id
   );
 
-  const handleDeletePost = () => {
-    deletePost({ postId: id, imageId: post?.imageId });
-    navigate(-1);
+
+  const handleDeletePost = async () => {
+    if (!id || !post?.imageId) {
+      toast({ title: "Invalid post or image ID." });
+      return;
+    }
+
+    setIsDeleting(true);
+    try {
+      await deletePostMutation.mutateAsync({ postId: id, imageId: post.imageId });
+      navigate(-1);
+    } catch (error) {
+      toast({ title: "Failed to delete post. Please try again." });
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const role = post?.creator.role && post.creator.role.length > 0 ? post.creator.role[0] : '';
@@ -144,18 +175,37 @@ const PostDetails = () => {
                   />
                 </Link>
 
-                <Button
-                  onClick={handleDeletePost}
-                  variant="ghost"
-                  className={`ost_details-delete_btn ${user.id !== post?.creator.$id && "hidden"
-                    }`}>
-                  <img
+                <Dialog>
+                  <DialogTrigger><img
                     src={"/assets/icons/delete.svg"}
                     alt="delete"
                     width={24}
                     height={24}
-                  />
-                </Button>
+                  /></DialogTrigger>
+                  <DialogContent className="h-40 border-4">
+                    <DialogHeader className="gap-1">
+                      <DialogTitle>Diesen Beitrag wirklich löschen?</DialogTitle>
+                      <DialogDescription>
+                        Dieser Vorgang kann nicht mehr rückgängig gemacht werden.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                      <DialogFooter className="rounded-lg absolute inset-y-24 right-6">
+                      <DialogClose asChild>
+                        <Button
+                          onClick={handleDeletePost}
+                          variant="ghost"
+                          disabled={isDeleting}
+                          className={`ost_details-delete_btn bg-ecurie-red ${user.id !== post?.creator.$id && "hidden" }` }>Löschen
+                        </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+
+
+
               </div>
             </div>
 

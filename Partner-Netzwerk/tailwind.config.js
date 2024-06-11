@@ -77,11 +77,16 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' }, // Starts from accordion content height
           to: { height: 0 }, // Animates to 0 height
         },
+        "caret-blink": {
+          "0%,70%,100%": { opacity: "1" },
+          "20%,50%": { opacity: "0" },
+        },
       },
       animation: {
         // Defines animation names using the keyframes
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        "caret-blink": "caret-blink 1.25s ease-out infinite",
       },
       maskImage: {
         'gradient-mask': 'linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0))',
@@ -107,3 +112,4 @@ module.exports = {
     },
   ],
 };
+
