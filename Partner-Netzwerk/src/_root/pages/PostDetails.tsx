@@ -28,8 +28,6 @@ import {
 
 import { useToast } from "@/components/ui/use-toast";
 
-
-
 const PostDetails = () => {
   const { toast } = useToast();
   const deletePostMutation = useDeletePost();

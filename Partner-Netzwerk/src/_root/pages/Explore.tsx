@@ -9,7 +9,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuCheckboxItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -30,40 +29,31 @@ const SearchResults: React.FC<SearchResultProps> = ({ isSearchFetching, searched
   }
 };
 
-
 const Explore: React.FC = () => {
   const { ref, inView } = useInView();
-  const { data: posts, fetchNextPage, hasNextPage } = useGetPosts();
+  const { data: posts, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetPosts();
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearch = useDebounce(searchValue, 500);
   const { data: searchedPosts, isFetching: isSearchFetching } = useSearchPosts(debouncedSearch);
 
   useEffect(() => {
-    if (inView && !searchValue) {
+    if (inView && !searchValue && !isFetchingNextPage && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView, searchValue]);
+  }, [inView, searchValue, isFetchingNextPage, hasNextPage]);
 
   const handleRoleChange = (role: string) => {
-    // Toggle the selection of the role
-    if (selectedRoles.includes(role)) {
-      setSelectedRoles(selectedRoles.filter(r => r !== role));
-    } else {
-      setSelectedRoles([...selectedRoles, role]);
-    }
+    setSelectedRoles(prevRoles => 
+      prevRoles.includes(role) ? prevRoles.filter(r => r !== role) : [...prevRoles, role]
+    );
   };
 
   const filterPostsByRoles = (posts: any[]) => {
     if (selectedRoles.length === 0) {
       return posts;
     }
-
-    // Filter posts based on selected roles
-    return posts.filter(post => {
-      // Check if any selected role matches the post creator's role
-      return selectedRoles.some(selectedRole => post.creator.role.includes(selectedRole));
-    });
+    return posts.filter(post => selectedRoles.some(role => post.creator.role.includes(role)));
   };
 
   if (!posts) {
@@ -74,22 +64,16 @@ const Explore: React.FC = () => {
     );
   }
 
-  const shouldShowSearchResults = searchValue !== "";
-  const shouldShowPosts = !shouldShowSearchResults &&
-    posts.pages.every((item) => item.documents.length === 0);
-
+  const shouldShowSearchResults = debouncedSearch !== "";
+  const filteredSearchPosts = searchedPosts ? filterPostsByRoles(searchedPosts.documents) : [];
+  const shouldShowPosts = !shouldShowSearchResults && posts.pages.every((item) => item.documents.length === 0);
 
   return (
     <div className="explore-container">
       <div className="explore-inner_container">
         <h2 className="h3-bold md:h2-bold w-full">Beiträge suchen</h2>
         <div className="flex gap-1 px-4 w-full rounded-lg bg-dark-4">
-          <img
-            src="/assets/icons/search.svg"
-            width={24}
-            height={24}
-            alt="search"
-          />
+          <img src="/assets/icons/search.svg" width={24} height={24} alt="search" />
           <Input
             type="text"
             placeholder="Suchen"
@@ -106,12 +90,7 @@ const Explore: React.FC = () => {
           <DropdownMenu>
             <DropdownMenuTrigger className="text-left bg-dark-3 rounded-xl gap-2 px-4 py-2 flex justify-between items-center w-full">
               <span>{selectedRoles.length > 0 ? selectedRoles.join(', ') : 'Nach Rolle sortieren'}</span>
-              <img
-                src="/assets/icons/filter.svg"
-                width={20}
-                height={20}
-                alt="filter"
-              />
+              <img src="/assets/icons/filter.svg" width={20} height={20} alt="filter" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-dark-1 border-4 border-dark-4 w-full">
               {["Ecurie-Aix", "Alumni", "Partner", "Hersteller"].map(role => (
@@ -124,24 +103,18 @@ const Explore: React.FC = () => {
                   {role}
                 </DropdownMenuCheckboxItem>
               ))}
-
             </DropdownMenuContent>
-
           </DropdownMenu>
-
         </div>
       </div>
 
       <div className="flex flex-wrap gap-9 w-full max-w-5xl">
         {shouldShowSearchResults ? (
-          <SearchResults
-            isSearchFetching={isSearchFetching}
-            searchedPosts={searchedPosts}
-          />
+          <SearchResults isSearchFetching={isSearchFetching} searchedPosts={{ documents: filteredSearchPosts }} />
         ) : shouldShowPosts ? (
           <p className="text-light-4 mt-10 text-center w-full">Ende der Beiträge</p>
         ) : (
-          posts.pages.map((page: any, index: number) => (
+          posts.pages.map((page, index) => (
             <GridPostList key={`page-${index}`} posts={filterPostsByRoles(page.documents)} />
           ))
         )}

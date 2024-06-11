@@ -68,9 +68,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
             savePost({ postId: post?.$id || '', userId })
             setIsSaved(true);
         }
-
     }
-
 
     return (
         <div className='flex justify-between items-center z-20'>

@@ -25,10 +25,8 @@ import {
   searchPosts,
   savePost,
   deleteSavedPost,
-  searchPostsByRole
 } from "@/lib/appwrite/api";
 import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
-
 
 // ============================================================
 // AUTH QUERIES
@@ -78,14 +76,6 @@ export const useSearchPosts = (searchTerm: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.SEARCH_POSTS, searchTerm],
     queryFn: () => searchPosts(searchTerm),
-    enabled: !!searchTerm,
-  });
-};
-
-export const useSearchPostsByRole = (searchTerm: string) => {
-  return useQuery({
-    queryKey: [QUERY_KEYS.SEARCH_POSTS, searchTerm],
-    queryFn: () => searchPostsByRole(searchTerm),
     enabled: !!searchTerm,
   });
 };
@@ -140,9 +130,8 @@ export const useUpdatePost = () => {
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ postId, imageId }: { postId?: string; imageId: string }) => {
-      return await deletePost(postId, imageId);
-    },
+    mutationFn: ({ postId, imageId }: { postId?: string; imageId: string }) =>
+      deletePost(postId, imageId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
