@@ -11,6 +11,8 @@ import {
   useGetPostById,
   useGetUserPosts,
   useDeletePost,
+  useDeleteSavedPost,
+  useGetCurrentUser,
 } from "@/lib/react-query/queriesAndMutations";
 import { multiFormatDateString, getNameColor } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
@@ -25,6 +27,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Models } from "appwrite";
 
 import { useToast } from "@/components/ui/use-toast";
 
@@ -39,7 +42,6 @@ const PostDetails = () => {
   const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
     post?.creator.$id
   );
- 
 
   const relatedPosts = userPosts?.documents.filter(
     (userPost) => userPost.$id !== id
@@ -51,7 +53,7 @@ const PostDetails = () => {
       toast({ title: "Invalid post or image ID." });
       return;
     }
-
+  
     setIsDeleting(true);
     try {
       await deletePostMutation.mutateAsync({ postId: id, imageId: post.imageId });

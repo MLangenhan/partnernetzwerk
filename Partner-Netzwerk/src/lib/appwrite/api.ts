@@ -353,26 +353,48 @@ export async function updatePost(post: IUpdatePost) {
 }
 
 // ============================== DELETE POST
+// ============================== DELETE POST
 export async function deletePost(postId?: string, imageId?: string): Promise<{ status: string }> {
   if (!postId || !imageId) throw new Error("Invalid parameters.");
 
   try {
-    const statusCode = await databases.deleteDocument(
+    // Query saves related to the post
+    const saves = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.savesCollectionId,
+      [Query.equal("post", postId)] // Use "post" instead of "postId"
+    );
+
+    console.log("Saves for Post:", saves.documents);
+
+    // Delete each save document
+    if (saves.documents.length > 0) {
+      await Promise.all(saves.documents.map(async (save: any) => {
+        await databases.deleteDocument(
+          appwriteConfig.databaseId,
+          appwriteConfig.savesCollectionId,
+          save.$id
+        );
+      }));
+    }
+
+    // Delete the post document
+    await databases.deleteDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
       postId
     );
 
-    if (!statusCode) throw new Error("Failed to delete document.");
-
+    // Delete the associated file from storage
     await deleteFile(imageId);
 
     return { status: "Ok" };
   } catch (error) {
-    console.error(error);
+    console.error("Error deleting post:", error);
     throw error;
   }
 }
+
 
 // ============================== LIKE / UNLIKE POST
 export async function likePost(postId: string, likesArray: string[]) {
