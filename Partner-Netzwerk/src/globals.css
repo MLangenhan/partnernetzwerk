@@ -1,3 +1,4 @@
+/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,11 +26,16 @@
 
   body {
     font-family: 'Univers LT Std', system-ui, sans-serif;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #ffffff; /* Light mode background */
+    color: #000000; /* Light mode text color */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Add transitions for background-color and color */
+  }
+
+  .dark body {
+    background-color: #000000; /* Dark mode background */
+    color: #ffffff; /* Dark mode text color */
   }
 }
-
 
 @layer utilities {
   /* TYPOGRAPHY */
@@ -113,16 +119,30 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: #09090a;
+    background: #e5e5e5; /* Light mode scrollbar track */
+    transition: background-color 0.5s ease; /* Add transition for scrollbar track background-color */
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #5c5c7b;
+    background: #a3a3a3; /* Light mode scrollbar thumb */
     border-radius: 50px;
+    transition: background-color 0.5s ease; /* Add transition for scrollbar thumb background-color */
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #7878a3;
+    background: #787878; /* Light mode scrollbar thumb hover */
+  }
+
+  .dark body .custom-scrollbar::-webkit-scrollbar-track {
+    background: #09090a; /* Dark mode scrollbar track */
+  }
+
+  .dark body .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #5c5c7b; /* Dark mode scrollbar thumb */
+  }
+
+  .dark body .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #7878a3; /* Dark mode scrollbar thumb hover */
   }
 
   .common-container {
@@ -148,7 +168,11 @@
   }
 
   .explore-search {
-    @apply h-12 bg-dark-4 border-none placeholder:text-ecurie-white focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
+    @apply h-12 bg-gray-200 border border-gray-300 placeholder:text-gray-500 focus-visible:ring-1 focus-visible:ring-gray-300;
+  }
+
+  .dark body .explore-search {
+    @apply bg-dark-4 border-none placeholder:text-ecurie-lightgrey focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
   }
 
   /* Home */
@@ -161,7 +185,7 @@
   }
 
   .home-creators {
-    @apply hidden xl:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10  overflow-scroll custom-scrollbar;
+    @apply hidden xl:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10 overflow-scroll custom-scrollbar;
   }
 
   /* Post Details */
@@ -170,19 +194,35 @@
   }
 
   .post_details-card {
-    @apply bg-dark-2 w-full max-w-5xl rounded-[30px] flex-col flex xl:flex-row border border-dark-4 xl:rounded-l-[24px];
+    @apply bg-white border border-gray-200 w-full max-w-5xl rounded-[30px] flex-col flex xl:flex-row;
+  }
+
+  .dark body .post_details-card {
+    @apply bg-dark-2 border border-dark-4 xl:rounded-l-[24px];
   }
 
   .post_details-img {
-    @apply h-80 lg:h-[480px] xl:w-[48%] rounded-t-[30px] xl:rounded-l-[24px] xl:rounded-tr-none object-cover p-5 bg-dark-1;
+    @apply h-80 lg:h-[480px] xl:w-[48%] rounded-t-[30px] xl:rounded-l-[24px] xl:rounded-tr-none object-cover p-5 bg-gray-100;
+  }
+
+  .dark body .post_details-img {
+    @apply p-5 bg-dark-1;
   }
 
   .post_details-info {
+    @apply bg-white flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
+  }
+
+  .dark body .post_details-info {
     @apply bg-dark-2 flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
   }
 
   .post_details-delete_btn {
-    @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1  text-light-1 small-medium lg:base-medium;
+    @apply p-0 flex gap-3 hover:bg-transparent hover:text-gray-700 text-gray-700 small-medium lg:base-medium;
+  }
+
+  .dark body .post_details-delete_btn {
+    @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1 text-light-1 small-medium lg:base-medium;
   }
 
   /* Profile */
@@ -195,7 +235,11 @@
   }
 
   .profile-tab {
-    @apply flex-center gap-3 py-4 w-48 bg-dark-2  transition flex-1 xl:flex-initial;
+    @apply flex-center gap-3 py-4 w-48 bg-gray-100 transition flex-1 xl:flex-initial;
+  }
+
+  .dark body .profile-tab {
+    @apply bg-dark-2;
   }
 
   /* Saved */
@@ -205,7 +249,11 @@
 
   /* Bottom bar */
   .bottom-bar {
-    @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-4 md:hidden;
+    @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-gray-200 px-5 py-4 md:hidden;
+  }
+
+  .dark body .bottom-bar {
+    @apply bg-dark-2;
   }
 
   /* File uploader */
@@ -214,6 +262,10 @@
   }
 
   .file_uploader-label {
+    @apply text-gray-400 text-center small-regular w-full p-4 border-t border-t-gray-200;
+  }
+
+  .dark body .file_uploader-label {
     @apply text-light-4 text-center small-regular w-full p-4 border-t border-t-dark-4;
   }
 
@@ -227,25 +279,45 @@
   }
 
   .grid-post_link {
-    @apply flex rounded-[24px] border border-dark-4 overflow-hidden cursor-pointer w-full h-full;
+    @apply flex rounded-[24px] border border-gray-200 overflow-hidden cursor-pointer w-full h-full;
+  }
+
+  .dark body .grid-post_link {
+    @apply border border-dark-4;
   }
 
   .grid-post_user {
-    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-dark-3 to-transparent rounded-b-[24px] gap-2;
+    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-gray-800 to-transparent rounded-b-[24px] gap-2;
+  }
+
+  .dark body .grid-post_user {
+    @apply bg-gradient-to-t from-dark-3 to-transparent;
   }
 
   /* Left sidebar */
   .leftsidebar {
-    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-dark-2;
+    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-gray-100;
+  }
+
+  .dark body .leftsidebar {
+    @apply bg-dark-2;
   }
 
   .leftsidebar-link {
-    @apply rounded-lg base-medium hover:bg-ecurie-babyblue transition;
+    @apply rounded-lg base-medium hover:bg-gray-200 transition;
+  }
+
+  .dark body .leftsidebar-link {
+    @apply hover:bg-ecurie-babyblue;
   }
 
   /* Post Card */
   .post-card {
-    @apply bg-dark-2 rounded-3xl border border-dark-4 p-5 lg:p-7 w-full max-w-screen-sm;
+    @apply bg-white border border-gray-200 rounded-3xl p-5 lg:p-7 w-full max-w-screen-sm;
+  }
+
+  .dark body .post-card {
+    @apply bg-dark-2 border border-dark-4;
   }
 
   .post-card_img {
@@ -254,12 +326,20 @@
 
   /* Topbar */
   .topbar {
-    @apply sticky top-0 z-50 md:hidden bg-dark-2 w-full;
+    @apply sticky top-0 z-50 md:hidden bg-gray-200 w-full;
+  }
+
+  .dark body .topbar {
+    @apply bg-dark-2;
   }
 
   /* User card */
   .user-card {
-    @apply flex-center flex-col gap-4 border border-dark-4 rounded-[20px] px-5 py-8;
+    @apply flex-center flex-col gap-4 border border-gray-200 rounded-[20px] px-5 py-8;
+  }
+
+  .dark body .user-card {
+    @apply border border-dark-4;
   }
 }
 
@@ -267,6 +347,10 @@
   /* SHADCN COMPONENTS */
   /* Form */
   .shad-form_label {
+    @apply text-black !important;
+  }
+
+  .dark body .shad-form_label {
     @apply text-white !important;
   }
 
@@ -275,23 +359,43 @@
   }
 
   .shad-input {
+    @apply h-12 bg-gray-100 border border-gray-300 placeholder:text-gray-500 focus-visible:ring-1 focus-visible:ring-gray-300 !important;
+  }
+
+  .dark body .shad-input {
     @apply h-12 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
   }
 
   .shad-textarea {
+    @apply h-36 bg-gray-100 rounded-xl border border-gray-300 focus-visible:ring-1 focus-visible:ring-gray-300 !important;
+  }
+
+  .dark body .shad-textarea {
     @apply h-36 bg-dark-3 rounded-xl border-none focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
   }
 
   /* Button */
   .shad-button_primary {
+    @apply bg-blue-500 hover:bg-blue-600 text-white flex gap-2 !important;
+  }
+
+  .dark body .shad-button_primary {
     @apply bg-ecurie-babyblue hover:bg-ecurie-darkblue text-light-1 flex gap-2 !important;
   }
 
   .shad-button_dark_4 {
+    @apply h-12 bg-gray-200 px-5 text-black flex gap-2 !important;
+  }
+
+  .dark body .shad-button_dark_4 {
     @apply h-12 bg-dark-4 px-5 text-light-1 flex gap-2 !important;
   }
 
   .shad-button_ghost {
+    @apply flex gap-4 items-center justify-start hover:bg-gray-100 hover:text-black !important;
+  }
+
+  .dark body .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
 }

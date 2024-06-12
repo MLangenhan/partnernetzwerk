@@ -51,7 +51,7 @@ const LeftSidebar = () => {
     }, [isSuccess])
 
     return (
-        <nav className='leftsidebar'>
+        <nav className="leftsidebar bg-gradient-to-l from-light-1 from:20% to-ecurie-lightgrey to-80% dark:from-dark-4 dark:from-40% dark:to-dark-2 dark:to-90%">
             <div className='flex flex-col gap-11'>
                 <Link to='/' className='flex gap-3 items-center'>
                     {/* Company logo */}

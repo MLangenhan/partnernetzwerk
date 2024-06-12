@@ -5,7 +5,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   // Enables dark mode support with class based detection (`class` key)
-  darkMode: ['class'],
+  darkMode: 'class',
 
   // Specifies the paths to your application files for content scanning
   content: [
@@ -43,13 +43,15 @@ module.exports = {
         'light-3': '#7878A3',
         'light-4': '#5C5C7B',
         'ecurie-babyblue': '#0064C8',
-        'ecurie-white': '#CCCCCC',
+        'ecurie-lightgrey': '#CCCCCC',
         'ecurie-darkblue': '#00468C',
         'ecurie-lightblue': '#8AB8E6',
         'ecurie-lightred': '#C74C46',
         'ecurie-darkred': '#941710',
         'ecurie-red': '#C61E15',
         'ecurie-blue': '#0055AA',
+        'ecurie-darkgrey': '#666666',
+        'ecurie-grey': '#999999',
       },
       screens: {
         // Adds an extra small screen breakpoint at 480px
