@@ -29,10 +29,10 @@ const LeftSidebar = () => {
             setNameColor('text-ecurie-lightblue');
         } else if (role === 'A') {
             setNameColor('text-ecurie-babyblue');
-        } else if (role === 'P'){
-            setNameColor('text-ecurie-red'); 
+        } else if (role === 'P') {
+            setNameColor('text-ecurie-red');
         }
-        else if (role === 'H'){
+        else if (role === 'H') {
             setNameColor('text-ecurie-darkred');
         }
         else {
@@ -51,7 +51,7 @@ const LeftSidebar = () => {
     }, [isSuccess])
 
     return (
-        <nav className="leftsidebar bg-gradient-to-l from-light-1 from:20% to-ecurie-lightgrey to-80% dark:from-dark-4 dark:from-40% dark:to-dark-2 dark:to-90%">
+        <nav className="leftsidebar bg-gradient-to-r from-ecurie-grey from:20% to-ecurie-grey to-80% dark:from-dark-3 dark:from-40% dark:to-dark-2 dark:to-90%">
             <div className='flex flex-col gap-11'>
                 <Link to='/' className='flex gap-3 items-center'>
                     {/* Company logo */}
@@ -71,7 +71,7 @@ const LeftSidebar = () => {
                         className='h-14 w-14 rounded-full object-cover'
                     />
                     <div className='flex flex-col'>
-                    <p className="body-bold font-Univers_LT_Std_57">
+                        <p className="body-bold font-Univers_LT_Std_57">
                             {user.name}
                         </p>
                         <p className={`small-regular ${nameColor}`}>
@@ -87,7 +87,7 @@ const LeftSidebar = () => {
 
                         return (
                             <li key={link.label}
-                                className={`leftsidebar-link group ${isActive && 'bg-ecurie-babyblue font-Univers_LT_Std_57'
+                                className={`rounded-lg base-medium hover:bg-ecurie-lightgrey transition leftsidebar-link group ${isActive && 'bg-ecurie-lightgrey dark:bg-ecurie-babyblue font-Univers_LT_Std_57'
                                     }`}>
                                 <NavLink
                                     to={link.route}
@@ -96,12 +96,13 @@ const LeftSidebar = () => {
                                     <img
                                         src={link.imgURL}
                                         alt={link.label}
-                                        className={`group-hover:invert-white ${isActive && 'invert-white'
+                                        className={`dark:group-hover:invert-white ${isActive && 'dark:invert-white'
                                             }`}
                                     />
                                     {link.label}
                                 </NavLink>
                             </li>
+
                         )
                     })}
                 </ul>
@@ -112,7 +113,7 @@ const LeftSidebar = () => {
                     src='/assets/icons/logout.svg'
                     alt='logout'
                 />
-                <p className = 'small-medium lg:base-medium'> 
+                <p className='small-medium lg:base-medium'>
                     Abmelden
                 </p>
             </Button>

@@ -168,7 +168,7 @@
   }
 
   .explore-search {
-    @apply h-12 bg-gray-200 border border-gray-300 placeholder:text-gray-500 focus-visible:ring-1 focus-visible:ring-gray-300;
+    @apply h-12 bg-ecurie-lightgrey border-none placeholder:text-gray-500 focus-visible:ring-1 focus-visible:ring-gray-300;
   }
 
   .dark body .explore-search {
@@ -287,7 +287,7 @@
   }
 
   .grid-post_user {
-    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-gray-800 to-transparent rounded-b-[24px] gap-2;
+    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-b from-ecurie-lightgrey to-ecurie-grey rounded-b-[24px] gap-2;
   }
 
   .dark body .grid-post_user {
@@ -304,7 +304,6 @@
   }
 
   .leftsidebar-link {
-    @apply rounded-lg base-medium hover:bg-gray-200 transition;
   }
 
   .dark body .leftsidebar-link {
@@ -313,7 +312,7 @@
 
   /* Post Card */
   .post-card {
-    @apply bg-white border border-gray-200 rounded-3xl p-5 lg:p-7 w-full max-w-screen-sm;
+    @apply bg-ecurie-lightgrey border border-ecurie-grey dark:border-gray-200 rounded-3xl p-5 lg:p-7 w-full max-w-screen-sm;
   }
 
   .dark body .post-card {
@@ -335,11 +334,11 @@
 
   /* User card */
   .user-card {
-    @apply flex-center flex-col gap-4 border border-gray-200 rounded-[20px] px-5 py-8;
+    @apply flex-center bg-ecurie-lightgrey flex-col gap-4 border border-ecurie-lightgrey rounded-[20px] px-5 py-8;
   }
 
   .dark body .user-card {
-    @apply border border-dark-4;
+    @apply border border-dark-4 bg-dark-2;
   }
 }
 

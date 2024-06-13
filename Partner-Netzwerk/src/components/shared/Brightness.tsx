@@ -1,7 +1,7 @@
 import { useTheme } from '@/components/shared/ThemeContext';
 import React, { useEffect, useState } from 'react';
-
-export const Switch: React.FC = () => {
+import { Switch } from "@/components/ui/switch"
+export const Brightness: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -12,18 +12,20 @@ export const Switch: React.FC = () => {
   }, [theme]);
 
   return (
-    <div className="container-switch">
-      <span>Change Theme </span>
-      <label className="switch">
-        <input 
+    <div className="flex items-center space-x-2">
+        {/*<input 
           type="checkbox" 
           checked={theme === 'dark'} 
           onChange={toggleTheme} 
           disabled={isTransitioning} // Prevent toggling during transition
-        />
+        />*/}
+        <div className="flex items-center space-x-2">
+          
+          <Switch className='' id="airplane-mode" checked={theme === 'dark'}
+                      onCheckedChange={toggleTheme}  />
+        </div>
         {/* Apply transition effect to the switch's background */}
         <span className={`slider ${isTransitioning ? 'transition-all duration-500' : ''}`}></span>
-      </label>
     </div>
   );
 };

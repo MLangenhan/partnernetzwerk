@@ -69,10 +69,19 @@ const Profile = () => {
                 {currentUser.telefon_nr !== null && currentUser.telefon_nr !== '' && (
                   <>
                     <img
-                      src={"/assets/icons/phone-icon.svg"}
-                      alt="edit"
+                      src="/assets/icons/phone-icon-black.svg"
+                      alt="phone"
                       width={20}
                       height={20}
+                      className="block dark:hidden"
+                    />
+                    {/* Dark mode image */}
+                    <img
+                      src="/assets/icons/phone-icon-white.svg"
+                      alt="phone"
+                      width={20}
+                      height={20}
+                      className="hidden dark:block"
                     />
                     <p className="">
                       {currentUser.telefon_nr}
@@ -83,10 +92,19 @@ const Profile = () => {
 
               <div className="flex gap-2 pt-1">
                 <img
-                  src={"/assets/icons/mail-icon.svg"}
-                  alt="edit"
+                  src="/assets/icons/mail-icon-black.svg"
+                  alt="phone"
                   width={20}
                   height={20}
+                  className="block dark:hidden"
+                />
+                {/* Dark mode image */}
+                <img
+                  src="/assets/icons/mail-icon-white.svg"
+                  alt="phone"
+                  width={20}
+                  height={20}
+                  className="hidden dark:block"
                 />
                 <p className="">
                   {currentUser.email}
@@ -94,7 +112,7 @@ const Profile = () => {
               </div>
               <div className="flex-left pt-2 pr-64">
                 {currentUser.linkedin !== '' && currentUser.linkedin !== null && (
-                  <a href={linkedInUrl} target="_blank" className="h-8 bg-dark-4 text-light-1 flex items-center rounded-lg px-2 w-fit">
+                  <a href={linkedInUrl} target="_blank" className="h-8 bg-ecurie-lightgrey dark:bg-dark-4 text-light-1 flex items-center rounded-lg px-2 w-fit">
                     <img
                       src="/assets/icons/linkedin-icon.svg"
                       alt="linkedin"
@@ -126,7 +144,7 @@ const Profile = () => {
             <div className={`${user.id !== currentUser.$id && "hidden"}`}>
               <Link
                 to={`/update-profile/${currentUser.$id}`}
-                className={`h-12 bg-dark-4 px-5 text-light-1 flex-center gap-2 rounded-lg ${user.id !== currentUser.$id && "hidden"
+                className={`h-12 bg-ecurie-lightgrey dark:bg-dark-4 px-5 text-light-1 flex-center gap-2 rounded-lg ${user.id !== currentUser.$id && "hidden"
                   }`}>
                 <img
                   src={"/assets/icons/edit.svg"}
@@ -148,7 +166,7 @@ const Profile = () => {
         <div className="flex max-w-5xl w-full">
           <Link
             to={`/profile/${id}`}
-            className={`profile-tab rounded-l-lg ${pathname === `/profile/${id}` && "!bg-dark-3"
+            className={`profile-tab rounded-l-lg ${pathname === `/profile/${id}` && "!bg-ecurie-lightgrey dark:!bg-dark-3"
               }`}>
             <img
               src={"/assets/icons/add-post.svg"}
@@ -160,7 +178,7 @@ const Profile = () => {
           </Link>
           <Link
             to={`/profile/${id}/liked-posts`}
-            className={`profile-tab rounded-r-lg ${pathname === `/profile/${id}/liked-posts` && "!bg-dark-3"
+            className={`profile-tab rounded-r-lg ${pathname === `/profile/${id}/liked-posts` && "!bg-ecurie-lightgrey dark:!bg-dark-3"
               }`}>
             <img
               src={"/assets/icons/like.svg"}

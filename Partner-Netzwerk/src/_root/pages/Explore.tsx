@@ -72,7 +72,7 @@ const Explore: React.FC = () => {
     <div className="explore-container">
       <div className="explore-inner_container">
         <h2 className="h3-bold md:h2-bold w-full">Beiträge suchen</h2>
-        <div className="flex gap-1 px-4 w-full rounded-lg bg-dark-4">
+        <div className="flex gap-1 px-4 w-full rounded-lg bg-ecurie-lightgrey dark:bg-dark-4">
           <img src="/assets/icons/search.svg" width={24} height={24} alt="search" />
           <Input
             type="text"
@@ -88,7 +88,7 @@ const Explore: React.FC = () => {
         <h3 className="body-bold md:h3-bold">Beliebt</h3>
         <div className="flex-center gap-3 rounded-xl px-4 py-2">
           <DropdownMenu>
-            <DropdownMenuTrigger className="text-left bg-dark-3 rounded-xl gap-2 px-4 py-2 flex justify-between items-center w-full">
+            <DropdownMenuTrigger className="text-left bg-ecurie-lightgrey dark:bg-dark-4 rounded-xl gap-2 px-4 py-2 flex justify-between items-center w-full">
               <span>{selectedRoles.length > 0 ? selectedRoles.join(', ') : 'Nach Rolle sortieren'}</span>
               <img src="/assets/icons/filter.svg" width={20} height={20} alt="filter" />
             </DropdownMenuTrigger>

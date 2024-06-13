@@ -1,6 +1,6 @@
 import { useUserContext } from '@/context/AuthContext' // Import the  useUserContext hook from the AuthContext
 
-import { Models } from 'appwrite' // Import Models interface (likely from Appwrite)
+import { Models } from 'appwrite' // Import Models interface 
 
 import React from 'react' // Import React library
 
@@ -50,7 +50,7 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
             )}
           </Link>
 
-          <div className='bg-dark-4 z-40 h-14 grid-post_user'>
+          <div className='bg-ecurie-lightgrey dark:bg-dark-4 z-40 h-14 grid-post_user'>
             {/* Conditionally render user info based on showUser prop */}
             {showUser && (
               <div className='flex items-center justify-start gap-2 flex-1 z-50'>

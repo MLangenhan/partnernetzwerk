@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { gapi } from 'gapi-script';
 import Event from '@/components/shared/Event';
 import { googleConfig, appwriteConfig } from "@/lib/appwrite/config";
-import { Switch } from '@/components/shared/Switch';
+import { Brightness } from '@/components/shared/Brightness';
 
 // Define EventProps interface
 interface EventProps {
@@ -79,9 +79,9 @@ const Home: React.FC = () => {
     <div className="flex flex-1">
       <div className="home-container">
         <div className="home-posts">
-          <h2 className="h3-bold md:h2-bold text-left w-full">Home Feed</h2>
-          <div className='flex'>
-            <Switch />
+          <div className="flex justify-between items-center w-full">
+            <h2 className="h3-bold md:h2-bold text-left">Home Feed</h2>
+            <Brightness />
           </div>
           {isPostLoading && !posts ? (
             <Loader />
