@@ -35,9 +35,9 @@ const UpdateProfile = () => {
       username: user.username,
       email: user.email,
       bio: user.bio || "",
-      abteilung: user.abteilung,
-      telefon_nr: user.telefon_nr,
-      linkedin: user.linkedin,
+      abteilung: user.abteilung || "",
+      telefon_nr: user.telefon_nr || "",
+      linkedin: user.linkedin || "",
     },
   });
 
