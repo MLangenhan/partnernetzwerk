@@ -26,19 +26,21 @@ const LeftSidebar = () => {
         // Determine color based on user's role
         const role = user?.role[0] || '';
         if (role === 'E') {
-            setNameColor('text-ecurie-lightblue');
+            setNameColor('text-ecurie-babyblue');
         } else if (role === 'A') {
             setNameColor('text-ecurie-babyblue');
         } else if (role === 'P') {
-            setNameColor('text-ecurie-red');
+            setNameColor('text-ecurie-pink');
         }
         else if (role === 'H') {
-            setNameColor('text-ecurie-darkred');
+            setNameColor('text-ecurie-pink');
         }
         else {
-            setNameColor('text-black');
+            setNameColor('text-ecurie-darkred');
         }
     }, [user]);
+    console.log(user.role)
+    console.log(nameColor)
 
     // useEffect hook to handle navigation after successful signOut
     useEffect(() => {
@@ -51,7 +53,7 @@ const LeftSidebar = () => {
     }, [isSuccess])
 
     return (
-        <nav className="leftsidebar bg-gradient-to-r from-ecurie-grey from:20% to-ecurie-grey to-80% dark:from-dark-3 dark:from-40% dark:to-dark-2 dark:to-90%">
+        <nav className="leftsidebar bg-gradient-to-l from-light-1 from:10% to-gray-300 to-90% dark:from-dark-3 dark:from-40% dark:to-dark-2 dark:to-90%">
             <div className='flex flex-col gap-11'>
                 <Link to='/' className='flex gap-3 items-center'>
                     {/* Company logo */}

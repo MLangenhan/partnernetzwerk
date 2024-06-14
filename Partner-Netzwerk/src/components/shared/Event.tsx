@@ -17,7 +17,7 @@ const Event: React.FC<EventProps> = ({ summary, start }) => {
 
     return (
             <div className="pb-4">
-                <div className="bg-ecurie-grey dark:bg-dark-4 py-2 pl-2 pr-8 gap-3 flex justify-between rounded-lg hover:bg-ecurie-babyblue hover:text-white align-baseline">
+                <div className="bg-ecurie-lightgrey dark:bg-dark-4 py-2 pl-2 pr-8 gap-3 flex justify-between rounded-lg hover:bg-ecurie-babyblue hover:text-white align-baseline">
                     <div className="flex items-center">
                         <p className="text-white font-bold text-lg pl-2 break-words w-44">{summary}</p>
                     </div>

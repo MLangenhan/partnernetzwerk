@@ -145,7 +145,7 @@ const PostDetails = () => {
                   className="w-8 h-8 lg:w-16 lg:h-16 rounded-full object-cover"
                 />
                 <div className="flex gap-1 flex-col">
-                  <p className="base-medium lg:body-bold text-light-1 font-Univers_LT_Std_57">
+                  <p className="base-medium lg:body-bold dark:text-light-1 font-Univers_LT_Std_57">
                     {post?.creator.name}
                   </p>
                   <p className={`base-medium ${nameColor}`}>
@@ -182,7 +182,7 @@ const PostDetails = () => {
                     width={24}
                     height={24}
                   /></DialogTrigger>
-                  <DialogContent className="h-40 border-4">
+                  <DialogContent className="text-light-1 bg-dark-4 dark:bg-transparent h-40 border-4">
                     <DialogHeader className="gap-1">
                       <DialogTitle>Diesen Beitrag wirklich löschen?</DialogTitle>
                       <DialogDescription>

@@ -92,7 +92,7 @@ const Explore: React.FC = () => {
               <span>{selectedRoles.length > 0 ? selectedRoles.join(', ') : 'Nach Rolle sortieren'}</span>
               <img src="/assets/icons/filter.svg" width={20} height={20} alt="filter" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-dark-1 border-4 border-dark-4 w-full">
+            <DropdownMenuContent className="bg-dark-1 border-4 text-light-1 border-dark-4 w-full">
               {["Ecurie-Aix", "Alumni", "Partner", "Hersteller"].map(role => (
                 <DropdownMenuCheckboxItem
                   key={role}

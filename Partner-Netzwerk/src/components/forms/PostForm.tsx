@@ -58,7 +58,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
             })
 
             if(!updatedPost){
-                toast({ title: 'Please try again!'});
+                toast({ title: 'Maximal 5MB in der Beta!'});
             }
 
             return navigate(`/posts/${post.$id}`)
@@ -85,7 +85,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
                     name="caption"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className='shad-form_label'>Bildunterschrift</FormLabel>
+                            <FormLabel className='text-dark-4 dark:text-light-1'>Bildunterschrift</FormLabel>
                             <FormControl>
                                 <Textarea className='shad-textarea custom-scrollbar' {...field} />
                             </FormControl>
@@ -98,7 +98,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
                     name="file"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className='shad-form_label'>Bild hinzufügen</FormLabel>
+                            <FormLabel className='text-dark-4  dark:text-light-1'>Bild hinzufügen</FormLabel>
                             <FormControl>
                                 <FileUploader
                                     fieldChange={field.onChange}
@@ -114,7 +114,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
                     name="location"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className='shad-form_label'>Standort hinzufügen</FormLabel>
+                            <FormLabel className='text-dark-4  dark:text-light-1'>Standort hinzufügen</FormLabel>
                             <FormControl>
                                 <Input type='text' className='shad-input' {...field} />
                             </FormControl>
@@ -127,7 +127,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
                     name="tags"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className='shad-form_label'>Tags hinzufügen ( mit einem Komma getrennt: " , " ) </FormLabel>
+                            <FormLabel className='text-dark-4 dark:text-light-1'>Tags hinzufügen ( mit einem Komma getrennt: " , " ) </FormLabel>
                             <FormControl>
                                 <Input type='text' className='shad-input' placeholder='Heute, Event, Auto' {...field} />
                             </FormControl>

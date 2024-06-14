@@ -345,24 +345,17 @@
 @layer components {
   /* SHADCN COMPONENTS */
   /* Form */
-  .shad-form_label {
-    @apply text-black !important;
-  }
-
-  .dark body .shad-form_label {
-    @apply text-white !important;
-  }
 
   .shad-form_message {
     @apply text-red !important;
   }
 
   .shad-input {
-    @apply h-12 bg-gray-100 border border-gray-300 placeholder:text-gray-500 focus-visible:ring-1 focus-visible:ring-gray-300 !important;
+    @apply h-12 bg-gray-100 text-dark-4 border-none placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-gray-300 ring-offset-light-3 !important;
   }
 
   .dark body .shad-input {
-    @apply h-12 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
+    @apply h-12 bg-dark-4 border-none text-light-1 placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
   }
 
   .shad-textarea {
@@ -375,7 +368,7 @@
 
   /* Button */
   .shad-button_primary {
-    @apply bg-blue-500 hover:bg-blue-600 text-white flex gap-2 !important;
+    @apply bg-ecurie-babyblue hover:bg-ecurie-darkblue text-light-1 flex gap-2 !important;
   }
 
   .dark body .shad-button_primary {

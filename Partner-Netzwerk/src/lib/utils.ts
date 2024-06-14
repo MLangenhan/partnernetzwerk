@@ -65,14 +65,14 @@ export const checkIsLiked = (likeList: string[], userId: string) => {
 export const getNameColor = (role: string) => {
   switch (role) {
     case 'Ecurie-Aix':
-      return 'text-ecurie-lightblue';
+      return 'text-ecurie-babyblue';
     case 'Alumni':
       return 'text-ecurie-babyblue';
     case 'Partner':
-      return 'text-ecurie-red';
+      return 'text-ecurie-pink';
     case 'Hersteller':
-      return 'text-ecurie-darkred';
+      return 'text-ecurie-pink';
     default:
-      return 'text-ecurie-lightblue';
+      return 'text-ecurie-darkred';
   }
 };

@@ -16,10 +16,8 @@ import { useUserContext } from "@/context/AuthContext";
 
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -70,8 +68,7 @@ const SigninForm = () => {
     <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
         <img src="/assets/images/Ecurie-Aix-Logo-blau.png" alt="logo" className="mb-10 size-18" />
-
-        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12 font-Univers_LT_Std_57">
+        <h2 className="h3-bold text-light-1 md:h2-bold pt-5 sm:pt-12 font-Univers_LT_Std_57">
           Willkommen zurück!
         </h2>
         <p className="text-ecurie-lightblue small-medium md:base-regular mt-2">
@@ -85,7 +82,7 @@ const SigninForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">E-Mail</FormLabel>
+                <FormLabel className="text-light-1">E-Mail</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -99,7 +96,7 @@ const SigninForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Passwort</FormLabel>
+                <FormLabel className="text-light-1">Passwort</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input type={showPassword ? "text" : "password"} className="shad-input pr-10" {...field} />
@@ -128,17 +125,27 @@ const SigninForm = () => {
           />
           <Dialog>
             <DialogTrigger className="text-left pl-2 text-ecurie-babyblue">Passwort vergessen?</DialogTrigger>
-            <DialogContent className="border-2">
+            <DialogContent className="border-2 text-light-1 ">
               <DialogHeader>
                 <DialogTitle>Kontaktieren Sie bitte einen Admin</DialogTitle>
                 <DialogDescription>
                   <div className="flex gap-2 pt-1">
                     <img
-                      src={"/assets/icons/mail-icon.svg"}
+                      src={"/assets/icons/mail-icon-white.svg"}
                       alt="edit"
                       width={20}
                       height={20}
                     />
+                    <p className="pt-2">@moritz.langenhan@rwth-aachen.de, @linus.holtkamp@rwth-aachen.de</p>
+                  </div>
+                  <div className="flex gap-2 pt-1">
+                    <img
+                      src={"/assets/icons/slack-new-logo.svg"}
+                      alt="edit"
+                      width={20}
+                      height={20}
+                    />
+                    <p className="pt-2">@MLAN, @LHOL</p>
                   </div>
                 </DialogDescription>
               </DialogHeader>

@@ -8,6 +8,7 @@ import { gapi } from 'gapi-script';
 import Event from '@/components/shared/Event';
 import { googleConfig, appwriteConfig } from "@/lib/appwrite/config";
 import { Brightness } from '@/components/shared/Brightness';
+import { BetaDisclaimer } from '@/components/shared/BetaDisclaimer';
 
 // Define EventProps interface
 interface EventProps {
@@ -77,7 +78,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="flex flex-1">
-      <div className="home-container">
+      <div className="home-container flex-grow">
         <div className="home-posts">
           <div className="flex justify-between items-center w-full">
             <h2 className="h3-bold md:h2-bold text-left">Home Feed</h2>
@@ -98,7 +99,7 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="home-creators">
+      <div className="home-creators relative">
         <h2 className="h3-bold md:h2-bold text-left w-full">Anstehende Events</h2>
         {filteredEvents.length === 0 ? (
           <p className="text-light-1">Bisher stehen keine Events an.</p>
@@ -112,6 +113,10 @@ const Home: React.FC = () => {
             ))}
           </ul>
         )}
+        {/* Apply Tailwind classes for absolute positioning */}
+        <div className="absolute bottom-4 right-4">
+          <BetaDisclaimer />
+        </div>
       </div>
     </div>
   );

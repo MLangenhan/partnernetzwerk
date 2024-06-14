@@ -52,6 +52,7 @@ module.exports = {
         'ecurie-blue': '#0055AA',
         'ecurie-darkgrey': '#666666',
         'ecurie-grey': '#999999',
+        'ecurie-pink': '#8A2560',
       },
       screens: {
         // Adds an extra small screen breakpoint at 480px

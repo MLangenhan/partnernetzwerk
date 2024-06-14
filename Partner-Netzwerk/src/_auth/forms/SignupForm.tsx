@@ -90,7 +90,7 @@ const SignupForm = () => {
       <div className="sm:w-420 flex-center flex-col">
         <img src="/assets/images/Ecurie-Aix-Logo-blau.png" alt="logo" className="mb-10 size-18" />
 
-        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12 font-Univers_LT_Std_57">
+        <h2 className="h3-bold md:h2-bold text-light-1 pt-5 sm:pt-12 font-Univers_LT_Std_57">
           Neues Konto erstellen
         </h2>
         <p className="text-ecurie-lightblue small-medium md:base-regular mt-2">
@@ -105,7 +105,7 @@ const SignupForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Name</FormLabel>
+                <FormLabel className="text-light-1">Name</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -115,13 +115,13 @@ const SignupForm = () => {
           />
 
           <FormItem>
-            <FormLabel className="shad-form_label">Rolle(n)</FormLabel>
+            <FormLabel className="text-light-1">Rolle(n)</FormLabel>
             <DropdownMenu>
-              <DropdownMenuTrigger className="bg-dark-4 text-left px-4 py-2 outline outline-2 rounded outline-dark-4 flex justify-between items-right w-full">
+              <DropdownMenuTrigger className="bg-gray-100 dark:bg-dark-4 text-left text-dark-4 dark:text-light-1 px-4 py-2 outline outline-2 rounded outline-dark-4 flex justify-between items-right w-full">
                 <span>{selectedRoles.length > 0 ? selectedRoles.join(', ') : 'Rolle auswählen'}</span>
                 <span className="ml-2">⌄</span>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-dark-1 border-4 border-dark-4 w-96">
+              <DropdownMenuContent className="bg-dark-1 text-light-1 border-4 border-dark-4 w-96">
                 <DropdownMenuLabel>Rolle auswählen</DropdownMenuLabel>
                 {["Ecurie-Aix", "Alumni", "Partner", "Hersteller"].map(role => (
                   <DropdownMenuCheckboxItem
@@ -142,7 +142,7 @@ const SignupForm = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Unternehmen</FormLabel>
+                <FormLabel className="text-light-1">Unternehmen</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -156,7 +156,7 @@ const SignupForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">E-Mail</FormLabel>
+                <FormLabel className="text-light-1">E-Mail</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -170,7 +170,7 @@ const SignupForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Passwort</FormLabel>
+                <FormLabel className="text-light-1">Passwort</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input type={showPassword ? "text" : "password"} className="shad-input pr-10" {...field} />
@@ -212,7 +212,7 @@ const SignupForm = () => {
               <Dialog>
                 <DialogTrigger className=" h-10 w-full flex-center rounded-lg"><Button className="shad-button_primary font-Univers_LT_Std_57 w-full">Fortfahren
                   </Button></DialogTrigger>
-                <DialogContent className="h-48 border-2">
+                <DialogContent className="text-light-1 h-48 border-2">
                   <DialogHeader>
                     <DialogTitle>Bitte geben Sie ihr Einmal-Token ein. </DialogTitle>
                     <DialogDescription>
