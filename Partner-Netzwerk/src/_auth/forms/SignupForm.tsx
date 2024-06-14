@@ -210,8 +210,11 @@ const SignupForm = () => {
               </Button>
             ) : (
               <Dialog>
-                <DialogTrigger className=" h-10 w-full flex-center rounded-lg"><Button className="shad-button_primary font-Univers_LT_Std_57 w-full">Fortfahren
-                  </Button></DialogTrigger>
+                <DialogTrigger className=" h-10 w-full flex-center rounded-lg">
+                  <Button className="shad-button_primary font-Univers_LT_Std_57 w-full" type="button">
+                    Fortfahren
+                  </Button>
+                </DialogTrigger>
                 <DialogContent className="text-light-1 h-48 border-2">
                   <DialogHeader>
                     <DialogTitle>Bitte geben Sie ihr Einmal-Token ein. </DialogTitle>
@@ -246,7 +249,7 @@ const SignupForm = () => {
                             onClick={() => { setVerified(true) }}
                             disabled={value.length != 6}
                             variant="secondary"
-                            type="submit"
+                            type="button"
                             className="gap-2 absolute inset-y-32 right-4 w-24 shad-button_primary font-Univers_LT_Std_57"
                           >
                             Bestätigen
@@ -262,7 +265,7 @@ const SignupForm = () => {
                           }}
                           disabled={value.length != 6}
                           variant="secondary"
-                          type="submit"
+                          type="button"
                           className="gap-2 absolute inset-y-32 right-6 w-24 shad-button_primary font-Univers_LT_Std_57"
                         >
                           Bestätigen
