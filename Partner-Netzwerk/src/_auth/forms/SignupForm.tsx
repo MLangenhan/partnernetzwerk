@@ -142,7 +142,7 @@ const SignupForm = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-light-1">Unternehmen</FormLabel>
+                <FormLabel className="text-light-1">Unternehmen / Verein</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -180,12 +180,12 @@ const SignupForm = () => {
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <img
-                        src={"/assets/icons/password-hide.svg"}
+                        src={"/assets/icons/password-hide-black.svg"}
                         alt="edit"
                         width={20}
                         height={20}
                       /> : <img
-                        src={"/assets/icons/password-show.svg"}
+                        src={"/assets/icons/password-show-black.svg"}
                         alt="edit"
                         width={20}
                         height={20}

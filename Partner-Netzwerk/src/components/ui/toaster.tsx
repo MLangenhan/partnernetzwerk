@@ -21,7 +21,7 @@ export function Toaster() {
       {/* Loop through each toast object in the `toasts` array */}
       {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
-          <Toast key={id} {...props}>
+          <Toast key={id} {...props} className="bg-ecurie-lightgrey border-dark-2 text-dark-2 dark:bg-dark-2 dark:border-light-1 dark:text-light-2">
             <div className="grid gap-1">
               {/* Conditionally render ToastTitle if a title exists */}
               {title && <ToastTitle>{title}</ToastTitle>}

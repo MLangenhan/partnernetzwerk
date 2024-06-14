@@ -105,19 +105,44 @@ const SigninForm = () => {
                       className="absolute inset-y-0 right-0 px-3 flex items-center text-sm leading-5"
                       onClick={() => setShowPassword(!showPassword)}
                     >
-                      {showPassword ? <img
-                        src={"/assets/icons/password-hide.svg"}
-                        alt="edit"
-                        width={20}
-                        height={20}
-                      /> : <img
-                        src={"/assets/icons/password-show.svg"}
-                        alt="edit"
-                        width={20}
-                        height={20}
-                      />}
+                      {showPassword ? (
+                        <>
+                          <img
+                            src="/assets/icons/password-hide-black.svg"
+                            alt="hide password"
+                            width={20}
+                            height={20}
+                            className="block dark:hidden"
+                          />
+                          <img
+                            src="/assets/icons/password-hide-white.svg"
+                            alt="hide password"
+                            width={20}
+                            height={20}
+                            className="hidden dark:block"
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <img
+                            src="/assets/icons/password-show-black.svg"
+                            alt="show password"
+                            width={20}
+                            height={20}
+                            className="block dark:hidden"
+                          />
+                          <img
+                            src="/assets/icons/password-show-white.svg"
+                            alt="show password"
+                            width={20}
+                            height={20}
+                            className="hidden dark:block"
+                          />
+                        </>
+                      )}
                     </button>
                   </div>
+
                 </FormControl>
                 <FormMessage />
               </FormItem>

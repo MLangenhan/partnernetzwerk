@@ -160,7 +160,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="border-t border-white w-6/12 my-4"></div>
+      <div className="border-t border-dark-1 dark:border-white w-6/12 my-4"></div>
 
       {currentUser.$id === user.id && (
         <div className="flex max-w-5xl w-full">
