@@ -11,8 +11,6 @@ import {
   useGetPostById,
   useGetUserPosts,
   useDeletePost,
-  useDeleteSavedPost,
-  useGetCurrentUser,
 } from "@/lib/react-query/queriesAndMutations";
 import { multiFormatDateString, getNameColor } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
@@ -27,7 +25,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Models } from "appwrite";
 
 import { useToast } from "@/components/ui/use-toast";
 

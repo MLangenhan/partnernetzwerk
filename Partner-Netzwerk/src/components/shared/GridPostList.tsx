@@ -2,8 +2,6 @@ import { useUserContext } from '@/context/AuthContext' // Import the  useUserCon
 
 import { Models } from 'appwrite' // Import Models interface 
 
-import React from 'react' // Import React library
-
 import { Link } from 'react-router-dom' // Import Link component for routing
 
 import PostStats from './PostStats' // Import PostStats component for displaying post stats

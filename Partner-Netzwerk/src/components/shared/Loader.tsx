@@ -1,5 +1,4 @@
-// Import the React library
-import React from 'react'
+
 
 // Define a functional component named Loader
 const Loader = () => {

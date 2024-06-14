@@ -14,7 +14,6 @@ export async function createUserAccount(user: INewUser) {
       user.email,
       user.password,
       user.name,
-      user.role
     );
 
     if (!newAccount) throw Error;

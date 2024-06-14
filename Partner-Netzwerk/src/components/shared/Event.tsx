@@ -40,7 +40,7 @@ const Event: React.FC<EventProps> = ({ summary, start }) => {
                             />
                             <p className="text-white text-sm pl-2 pt-0.5">{eventTime}</p>
                         </div>
-                        <a href={googleCalendarLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 text-xl font-bold underline ml-4 no-underline pb-1 pl-2">
+                        <a href={googleCalendarLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 text-xl font-bold ml-4 no-underline pb-1 pl-2">
                         <img className='pt-1'
                                 src={"/assets/icons/calendaradd-icon.svg"}
                                 alt="calendaradd"

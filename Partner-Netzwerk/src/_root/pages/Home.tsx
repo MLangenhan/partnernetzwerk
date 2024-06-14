@@ -6,7 +6,7 @@ import { Models } from 'appwrite';
 import React, { useEffect, useState } from 'react';
 import { gapi } from 'gapi-script';
 import Event from '@/components/shared/Event';
-import { googleConfig, appwriteConfig } from "@/lib/appwrite/config";
+import { googleConfig } from "@/lib/appwrite/config";
 import { Brightness } from '@/components/shared/Brightness';
 import { BetaDisclaimer } from '@/components/shared/BetaDisclaimer';
 
@@ -30,7 +30,6 @@ const Home: React.FC = () => {
 
   const calendarID = googleConfig.calendarId;
   const apiKey = googleConfig.apiKey;
-  const url = appwriteConfig.url;
 
   const getEvents = (calendarID: string, apiKey: string): void => {
     function initiate() {
