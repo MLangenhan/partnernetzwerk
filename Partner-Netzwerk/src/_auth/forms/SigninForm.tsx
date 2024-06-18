@@ -66,7 +66,7 @@ const SigninForm = () => {
 
   return (
     <Form {...form}>
-      <div className="sm:w-420 flex-center flex-col">
+      <div className="lg:w-420 w-96 flex-center flex-col">
         <img src="/assets/images/Ecurie-Aix-Logo-blau.png" alt="logo" className="mb-10 size-18" />
         <h2 className="h3-bold text-light-1 md:h2-bold pt-5 sm:pt-12 font-Univers_LT_Std_57">
           Willkommen zurück!
@@ -76,7 +76,7 @@ const SigninForm = () => {
         </p>
         <form
           onSubmit={form.handleSubmit(handleSignin)}
-          className="flex flex-col gap-5 w-full mt-4">
+          className="flex flex-col gap-5 w-96 md:w-full mt-4">
           <FormField
             control={form.control}
             name="email"

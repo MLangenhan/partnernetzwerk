@@ -19,6 +19,16 @@ import { Models } from "appwrite"
 import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations"
 import { useUserContext } from "@/context/AuthContext"
 import { useToast } from "../ui/use-toast"
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from "@/components/ui/dialog"
 
 
 type PostFormProps = {
@@ -48,17 +58,17 @@ const PostForm = ({ post, action }: PostFormProps) => {
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof PostValidation>) {
 
-        if(post && action === 'aktualisieren'){
+        if (post && action === 'aktualisieren') {
             const updatedPost = await updatePost({
-                ...values, 
+                ...values,
                 postId: post.$id,
                 imageId: post?.imageId,
                 imageUrl: post.ImageUrl,
                 mimeType: post.mimeType,
             })
 
-            if(!updatedPost){
-                toast({ title: 'Maximal 5MB in der Beta!'});
+            if (!updatedPost) {
+                toast({ title: 'Maximal 5MB in der Beta!' });
             }
 
             return navigate(`/posts/${post.$id}`)
@@ -70,8 +80,8 @@ const PostForm = ({ post, action }: PostFormProps) => {
             mimeType: post?.mimeType,
         })
 
-        if(!newPost) {
-            toast({ title: 'Please try again!'})
+        if (!newPost) {
+            toast({ title: 'Please try again!' })
         }
 
         navigate('/');
@@ -93,22 +103,23 @@ const PostForm = ({ post, action }: PostFormProps) => {
                         </FormItem>
                     )}
                 />
-                <FormField
-                    control={form.control}
-                    name="file"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel className='text-dark-4  dark:text-light-1'>Bild hinzufügen</FormLabel>
-                            <FormControl>
-                                <FileUploader
-                                    fieldChange={field.onChange}
-                                    mediaUrl={post?.imageUrl}
-                                />
-                            </FormControl>
-                            <FormMessage className='shad-form_message' />
-                        </FormItem>
-                    )}
-                />
+                {action === 'aktualisieren' ? "" :
+                    <FormField
+                        control={form.control}
+                        name="file"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className='text-dark-4  dark:text-light-1'>Bild hinzufügen</FormLabel>
+                                <FormControl>
+                                    <FileUploader
+                                        fieldChange={field.onChange}
+                                        mediaUrl={post?.imageUrl}
+                                    />
+                                </FormControl>
+                                <FormMessage className='shad-form_message' />
+                            </FormItem>
+                        )}
+                    />}
                 <FormField
                     control={form.control}
                     name="location"
@@ -136,14 +147,32 @@ const PostForm = ({ post, action }: PostFormProps) => {
                     )}
                 />
                 <div className='flex gap-4 items-center justify-end'>
-                    <Button type="button" className='shad-button_dark_4'>Zurück</Button>
-                    <Button 
-                    type="submit" 
-                    className='shad-button_primary whitespace-nowrap'
-                    disabled = {isLoadingCreate || isLoadingCreate}
+                    <Dialog>
+                        <DialogTrigger><Button type="button" className='shad-button_dark_4'>Zurück</Button></DialogTrigger>
+                        <DialogContent className="text-dark-4 dark:text-light-1 bg-ecurie-lightgrey dark:bg-dark-4 h-40 border-4">
+                            <DialogHeader className="gap-1">
+                                <DialogTitle>Diesen Vorgang wirklich abbrechen?</DialogTitle>
+                                <DialogDescription>
+                                    Wenn Sie nun zurückkehren gehen alle ihre Änderungen verloren.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <DialogFooter>
+                                <DialogFooter className="rounded-lg absolute inset-y-24 right-6">
+                                    <DialogClose asChild>
+                                    <Button type="button" className='shad-button_lightgrey' onClick={() => { navigate(-1) }}>Zurück</Button>
+                                    </DialogClose>
+                                </DialogFooter>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
+                    
+                    <Button
+                        type="submit"
+                        className='shad-button_primary whitespace-nowrap h-12'
+                        disabled={isLoadingCreate || isLoadingCreate}
                     >
                         {isLoadingCreate || isLoadingUpdate && 'Loading...'}
-                        Beitrag {action} 
+                        Beitrag {action}
                     </Button>
                 </div>
 

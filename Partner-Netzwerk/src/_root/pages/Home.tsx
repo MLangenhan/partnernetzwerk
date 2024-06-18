@@ -15,7 +15,7 @@ interface EventProps {
   id: string;
   summary: string;
   start: {
-    dateTime: string;
+    date: string;
   };
 }
 
@@ -66,42 +66,46 @@ const Home: React.FC = () => {
   // Filter out events that are past the current date and sort them by date
   const filteredEvents = events
     .filter((event) => {
-      const eventDate = new Date(event.start.dateTime);
+      const eventDate = new Date(event.start.date);
       return eventDate >= new Date(); // Only include events that are after the current date
     })
     .sort((a, b) => {
-      const dateA = new Date(a.start.dateTime).getTime();
-      const dateB = new Date(b.start.dateTime).getTime();
+      const dateA = new Date(a.start.date).getTime();
+      const dateB = new Date(b.start.date).getTime();
       return dateA - dateB; // Sort by date in ascending order
     });
 
   return (
     <div className="flex flex-1">
-      <div className="home-container flex-grow">
-        <div className="home-posts">
-          <div className="flex justify-between items-center w-full">
-            <h2 className="h3-bold md:h2-bold text-left">Home Feed</h2>
-            <Brightness />
-          </div>
-          {isPostLoading && !posts ? (
-            <Loader />
-          ) : (
-            <ul className="flex flex-col flex-1 gap-9 w-full">
-              {posts?.documents.map((post: Models.Document) => (
-                <li key={post.$id} className="flex justify-center w-full">
-                  {/* Pass the media type to PostCard */}
-                  <PostCard post={post} />
-                </li>
-              ))}
-            </ul>
-          )}
+  <div className="home-container flex-grow relative">
+    <div className="home-posts">
+      <div className="flex justify-between items-center w-full">
+        <h2 className="h3-bold md:h2-bold text-left">Home Feed</h2>
+        <div className="">
+          <BetaDisclaimer />
         </div>
+        <Brightness />
       </div>
+      {isPostLoading && !posts ? (
+        <Loader />
+      ) : (
+        <ul className="flex flex-col flex-1 gap-9 w-full">
+          {posts?.documents.map((post: Models.Document) => (
+            <li key={post.$id} className="flex justify-center w-full">
+              {/* Pass the media type to PostCard */}
+              <PostCard post={post} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+    
+  </div>
 
       <div className="home-creators relative">
         <h2 className="h3-bold md:h2-bold text-left w-full">Anstehende Events</h2>
         {filteredEvents.length === 0 ? (
-          <p className="text-light-1">Bisher stehen keine Events an.</p>
+          <p className="text-dark-4 dark:text-light-1">Bisher stehen keine Events an.</p>
         ) : (
           <ul>
             {filteredEvents.map((event) => (
@@ -113,9 +117,7 @@ const Home: React.FC = () => {
           </ul>
         )}
         {/* Apply Tailwind classes for absolute positioning */}
-        <div className="absolute bottom-4 right-4">
-          <BetaDisclaimer />
-        </div>
+
       </div>
     </div>
   );

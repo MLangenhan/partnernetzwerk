@@ -98,7 +98,7 @@ const PostDetails = () => {
         <Loader />
       ) : (
         <div className="post_details-card">
-          <a href={post?.imageUrl} target="_blank" className="w-1/2">
+          <a href={post?.imageUrl} target="_blank" className="flex xl:w-1/2 sm:pt-4">
             {isImage && (
               <img
                 src={fileUrl}
@@ -178,8 +178,9 @@ const PostDetails = () => {
                     alt="delete"
                     width={24}
                     height={24}
+                    className={`${user.id !== post?.creator.$id && "hidden" }`}
                   /></DialogTrigger>
-                  <DialogContent className="text-light-1 bg-dark-4 dark:bg-transparent h-40 border-4">
+                  <DialogContent className="text-dark-4 dark:text-light-1 bg-ecurie-lightgrey dark:bg-dark-4 h-40 border-4">
                     <DialogHeader className="gap-1">
                       <DialogTitle>Diesen Beitrag wirklich löschen?</DialogTitle>
                       <DialogDescription>
@@ -193,7 +194,7 @@ const PostDetails = () => {
                           onClick={handleDeletePost}
                           variant="ghost"
                           disabled={isDeleting}
-                          className={`ost_details-delete_btn bg-ecurie-red ${user.id !== post?.creator.$id && "hidden" }` }>Löschen
+                          className="post_details-delete_btn bg-ecurie-red">Löschen
                         </Button>
                         </DialogClose>
                       </DialogFooter>

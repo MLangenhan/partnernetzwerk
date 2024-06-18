@@ -12,7 +12,7 @@ const Topbar = () => {
 
     useEffect(() => {
         if (isSuccess) { // Check if signOut mutation was successful
-            navigate('/'); // If successful, navigate to home route (/)
+            navigate(0); // If successful, navigate to home route (/)
         }
     }, [isSuccess]); // Dependency array for useEffect - only re-run on isSuccess change
 

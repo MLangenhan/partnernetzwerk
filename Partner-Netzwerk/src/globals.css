@@ -391,3 +391,6 @@
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
 }
+.shad-button_lightgrey {
+  @apply h-12 bg-ecurie-lightgrey px-5 text-black flex gap-2 !important;
+}
