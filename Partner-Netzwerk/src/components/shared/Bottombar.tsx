@@ -13,16 +13,16 @@ const Bottombar = () => {
           <Link
             to={link.route}
             key={link.label}
-            className={`${isActive && 'bg-ecurie-babyblue rounded-[10px]'} flex-center flex-col gap-1 p-2 transition`}>
+            className={`${isActive && 'bg-ecurie-lightgrey dark:bg-ecurie-babyblue rounded-[10px]'} flex-center flex-col gap-1 p-2 transition`}>
 
             <img
               src={link.imgURL}
               alt={link.label}
               width={16}
               height={16}
-              className={`group-hover:invert-white ${isActive && 'invert-white'}`} // Apply invert-white on hover and active
+              className={`dark:group-hover:invert-white ${isActive && 'dark:invert-white'}`} // Apply invert-white on hover and active
             />
-            <p className='tiny-medium text-light-2'>
+            <p className='tiny-medium dark:text-light-2'>
               {link.label}
             </p>
           </Link>
