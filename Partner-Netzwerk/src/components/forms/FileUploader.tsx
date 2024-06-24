@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react'
-import { FileWithPath, useDropzone } from 'react-dropzone'
-import { Button } from '../ui/button'
+import { useState, useCallback } from 'react';
+import { FileWithPath, useDropzone } from 'react-dropzone';
+import { Button } from '../ui/button';
 
 type FileUploaderProps = {
   fieldChange: (files: File[]) => void;
@@ -16,19 +16,19 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
     fieldChange(acceptedFiles);
     const newFileUrl = URL.createObjectURL(acceptedFiles[0]);
     setFileUrl(newFileUrl);
-  }, [file]);
+  }, [fieldChange]); // Note: remove 'file' from dependency array to avoid unnecessary recreations of onDrop
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
       'image/*': ['.png', '.jpeg', '.jpg', '.svg'],
       'application/pdf': ['.pdf'],
-      'video/mp4': ['.mp4'],
+      'video/mp4': ['.mp4', '.mov'],
     },
   });
 
   return (
-    <div {...getRootProps()} className='flex flex-center flex-col bg-ecurie-lightgrey dark:bg-dark-3 rounded-xl cursor-pointer'>
+    <div {...getRootProps()} className='flex flex-center flex-col bg-ecurie-lightgrey dark:bg-dark-4 rounded-xl cursor-pointer'>
       <input {...getInputProps()} className='cursor-pointer' />
       {fileUrl && file.length > 0 ? (
         <>
@@ -37,9 +37,9 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
               <img src={fileUrl} alt="uploaded" className='file_uploader-img' />
             ) : file[0].type === 'application/pdf' ? (
               <embed src={fileUrl} width="100%" height="500px" type="application/pdf" />
-            ) : file[0].type === 'video/mp4' ? (
+            ) : file[0].type === 'video/mp4' || file[0].type === 'video/quicktime' ? ( // Adjusted for .mov
               <video width="100%" controls>
-                <source src={fileUrl} type="video/mp4" />
+                <source src={fileUrl} type={file[0].type} />
                 Your browser does not support the video tag.
               </video>
             ) : null}
@@ -50,12 +50,12 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
         <div className='file_uploader-box'>
           <img src='/assets/icons/file-upload.svg' width={96} height={77} alt='file-upload' />
           <h3 className='base-medium text-light-2 mb-2 mt-6'>Hier Bild einfügen</h3>
-          <p className='text-light-4 small-regular mb-6'>SVG, PNG, JPG, PDF, MP4</p>
+          <p className='text-light-4 small-regular mb-6'>SVG, PNG, JPG, PDF, MP4, MOV</p>
           <Button className='shad-button_dark_4'>Datei auswählen</Button>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default FileUploader
+export default FileUploader;

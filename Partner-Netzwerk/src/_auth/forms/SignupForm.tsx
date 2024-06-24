@@ -117,7 +117,7 @@ const SignupForm = () => {
           <FormItem>
             <FormLabel className="text-light-1">Rolle(n)</FormLabel>
             <DropdownMenu>
-              <DropdownMenuTrigger className="bg-gray-100 dark:bg-dark-4 text-left text-dark-4 dark:text-light-1 px-4 py-2 outline outline-2 rounded outline-dark-4 flex justify-between items-right w-full">
+              <DropdownMenuTrigger className="bg-ecurie-lightgrey dark:bg-dark-4 text-left text-dark-4 dark:text-light-1 px-4 py-2 outline outline-2 rounded outline-dark-4 flex justify-between items-right w-full">
                 <span>{selectedRoles.length > 0 ? selectedRoles.join(', ') : 'Rolle auswählen'}</span>
                 <span className="ml-2">⌄</span>
               </DropdownMenuTrigger>

@@ -138,7 +138,7 @@ const UpdateProfile = () => {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="shad-form_label">Unternehmen</FormLabel>
+                  <FormLabel className="shad-form_label">Unternehmen/Verein</FormLabel>
                   <FormControl>
                     <Input
                       type="text"

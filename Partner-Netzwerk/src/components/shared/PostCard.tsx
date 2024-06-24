@@ -29,7 +29,7 @@ const PostCard = ({ post }: PostCardProps) => {
 
   // Determine the file type from the mimeType
   const isImage = mimeType && mimeType.startsWith('image/');
-  const isVideo = mimeType && mimeType.startsWith('video/');
+  const isVideo = mimeType && (mimeType.startsWith('video/mp4') || mimeType.startsWith('video/quicktime')); // Adjusted for .mov
   const isPDF = mimeType && mimeType === 'application/pdf';
 
   return (
@@ -92,6 +92,7 @@ const PostCard = ({ post }: PostCardProps) => {
           )}
         </div>
       </Link>
+
       {/* Render content based on mimeType */}
       {isImage && (
         <img
@@ -102,7 +103,7 @@ const PostCard = ({ post }: PostCardProps) => {
       )}
       {isVideo && (
         <video controls className="post-card_img"> 
-          <source src={fileUrl} type="video/mp4" />
+          <source src={fileUrl} type={mimeType} /> {/* Use mimeType directly */}
           Dieser Datei-Typ wird von deinem Browser leider nicht unterstützt.
         </video>
       )}
@@ -119,7 +120,6 @@ const PostCard = ({ post }: PostCardProps) => {
           <p>Dieser Datei-Typ wird leider nicht unterstützt.</p>
         </div>
       )}
-
 
       {/* Post Stats Section */}
       <PostStats post={post} userId={user.id} />

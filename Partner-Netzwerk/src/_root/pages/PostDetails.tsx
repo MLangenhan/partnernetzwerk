@@ -6,7 +6,6 @@ import Loader from "@/components/shared/Loader";
 import GridPostList from "@/components/shared/GridPostList";
 import PostStats from "@/components/shared/PostStats";
 
-
 import {
   useGetPostById,
   useGetUserPosts,
@@ -44,7 +43,6 @@ const PostDetails = () => {
     (userPost) => userPost.$id !== id
   );
 
-
   const handleDeletePost = async () => {
     if (!id || !post?.imageId) {
       toast({ title: "Invalid post or image ID." });
@@ -71,7 +69,7 @@ const PostDetails = () => {
 
   // Determine the file type from the mimeType
   const isImage = mimeType && mimeType.startsWith('image/');
-  const isVideo = mimeType && mimeType.startsWith('video/');
+  const isVideo = mimeType && (mimeType.startsWith('video/mp4') || mimeType.startsWith('video/quicktime')); // Adjusted for .mov
   const isPDF = mimeType && mimeType === 'application/pdf';
 
   // Filter out empty strings from tags
@@ -108,7 +106,9 @@ const PostDetails = () => {
             )}
             {isVideo && (
               <video controls className="file_uploader-img">
-                <source src={fileUrl} type="video/mp4" />
+                {/* Render video according to its MIME type */}
+                {mimeType === 'video/mp4' && <source src={fileUrl} type="video/mp4" />}
+                {mimeType === 'video/quicktime' && <source src={fileUrl} type="video/quicktime" />}
                 Your browser does not support the video tag.
               </video>
             )}
@@ -201,8 +201,6 @@ const PostDetails = () => {
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
-
-
 
               </div>
             </div>

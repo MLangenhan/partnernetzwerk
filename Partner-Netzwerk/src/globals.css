@@ -198,7 +198,7 @@
   }
 
   .dark body .post_details-card {
-    @apply bg-dark-2 border border-dark-4 xl:rounded-l-[24px];
+    @apply bg-dark-4 border border-dark-4 xl:rounded-l-[24px];
   }
 
   .post_details-img {
@@ -214,7 +214,7 @@
   }
 
   .dark body .post_details-info {
-    @apply bg-dark-2 flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
+    @apply bg-dark-4 flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
   }
 
   .post_details-delete_btn {
@@ -239,7 +239,7 @@
   }
 
   .dark body .profile-tab {
-    @apply bg-dark-2;
+    @apply bg-dark-4;
   }
 
   /* Saved */
@@ -253,7 +253,7 @@
   }
 
   .dark body .bottom-bar {
-    @apply bg-dark-2;
+    @apply bg-dark-4;
   }
 
   /* File uploader */
@@ -291,7 +291,7 @@
   }
 
   .dark body .grid-post_user {
-    @apply bg-gradient-to-t from-dark-3 to-transparent;
+    @apply bg-gradient-to-t from-dark-4 to-transparent;
   }
 
   /* Left sidebar */
@@ -300,7 +300,7 @@
   }
 
   .dark body .leftsidebar {
-    @apply bg-dark-2;
+    @apply bg-dark-4;
   }
 
   .leftsidebar-link {
@@ -316,7 +316,7 @@
   }
 
   .dark body .post-card {
-    @apply bg-dark-2 border border-dark-4;
+    @apply bg-dark-4 border border-dark-4;
   }
 
   .post-card_img {
@@ -329,7 +329,7 @@
   }
 
   .dark body .topbar {
-    @apply bg-dark-2;
+    @apply bg-dark-4;
   }
 
   /* User card */
@@ -338,7 +338,7 @@
   }
 
   .dark body .user-card {
-    @apply border border-dark-4 bg-dark-2;
+    @apply border border-dark-4 bg-dark-4;
   }
 }
 
@@ -351,7 +351,7 @@
   }
 
   .shad-input {
-    @apply h-12 bg-gray-100 text-dark-4 border-none placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-gray-300 ring-offset-light-3 !important;
+    @apply h-12 bg-ecurie-lightgrey text-dark-4 border-none placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-gray-300 ring-offset-light-3 !important;
   }
 
   .dark body .shad-input {
@@ -359,11 +359,11 @@
   }
 
   .shad-textarea {
-    @apply h-36 bg-gray-100 rounded-xl border border-gray-300 focus-visible:ring-1 focus-visible:ring-gray-300 !important;
+    @apply h-36 bg-ecurie-lightgrey rounded-xl border border-gray-300 focus-visible:ring-1 focus-visible:ring-gray-300 !important;
   }
 
   .dark body .shad-textarea {
-    @apply h-36 bg-dark-3 rounded-xl border-none focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
+    @apply h-36 bg-dark-4 rounded-xl border-none focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
   }
 
   /* Button */

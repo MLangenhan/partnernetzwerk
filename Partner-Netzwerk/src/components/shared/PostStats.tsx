@@ -96,7 +96,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
                             : '/assets/icons/save.svg'
                             }
                          `}
-                        alt='like'
+                        alt='save'
                         width={20}
                         height={20}
                         onClick={handleSavePost}
