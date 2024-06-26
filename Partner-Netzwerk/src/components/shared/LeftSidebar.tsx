@@ -22,10 +22,10 @@ const LeftSidebar = () => {
         } else if (role === 'A') {
             setNameColor('text-ecurie-babyblue');
         } else if (role === 'P') {
-            setNameColor('text-ecurie-pink');
+            setNameColor('text-ecurie-blue');
         }
         else if (role === 'H') {
-            setNameColor('text-ecurie-pink');
+            setNameColor('text-ecurie-blue');
         }
         else {
             setNameColor('text-ecurie-darkred');
@@ -39,7 +39,7 @@ const LeftSidebar = () => {
     }, [isSuccess, navigate]);
 
     return (
-        <nav className="leftsidebar bg-gradient-to-l from-light-1 from:10% to-gray-300 to-90% dark:from-dark-1 dark:from-40% dark:to-dark-3 dark:to-90%">
+        <nav className="leftsidebar bg-gradient-to-l from-light-1 from:10% to-gray-300 to-90% dark:from-dark-1 dark:from-40% dark:to-dark-2 dark:to-90%">
             <div className='flex flex-col gap-11'>
                 <Link to='/' className='flex gap-3 items-center'>
                     <img

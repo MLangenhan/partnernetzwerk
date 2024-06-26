@@ -31,7 +31,7 @@ const UserCard = ({ user }: UserCardProps) => {
 
       {/* Display user name and username */}
       <div className="flex-center flex-col gap-1">
-        <p className="base-medium text-light-1 text-center line-clamp-1 font-Univers_LT_Std_57">
+        <p className="base-medium dark:text-light-1 text-center line-clamp-1 font-Univers_LT_Std_57">
           {user.name}
         </p>
         <p className={`small-regular text-center line-clamp-1 ${nameColor}`}>
