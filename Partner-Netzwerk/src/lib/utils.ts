@@ -66,6 +66,10 @@ export const getNameColor = (role: string) => {
   switch (role) {
     case 'Ecurie-Aix':
       return 'text-ecurie-babyblue';
+    case 'Ecurie-Aix Mitglied':
+      return 'text-ecurie-babyblue';
+    case 'Ecurie-Aix Leitungsmitglied':
+      return 'text-ecurie-babyblue';  
     case 'Alumni':
       return 'text-ecurie-babyblue';
     case 'Partner':

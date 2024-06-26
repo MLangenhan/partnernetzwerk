@@ -123,7 +123,7 @@ const SignupForm = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-dark-1 text-light-1 border-4 border-dark-4 w-96">
                 <DropdownMenuLabel>Rolle auswählen</DropdownMenuLabel>
-                {["Ecurie-Aix", "Alumni", "Partner", "Hersteller"].map(role => (
+                {["Ecurie-Aix Mitglied", "Ecurie-Aix Leitungsmitglied", "Partner", "Hersteller"].map(role => (
                   <DropdownMenuCheckboxItem
                     key={role}
                     checked={selectedRoles.includes(role)}
