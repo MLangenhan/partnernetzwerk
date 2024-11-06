@@ -68,8 +68,9 @@ const LeftSidebar = () => {
 
                 <ul className='flex flex-col gap-6'>
                     {sidebarLinks.map((link: INavLink) => {
-                        // Conditionally hide "Beitrag erstellen" if role is 'E'
-                        if (link.label === 'Beitrag erstellen' && (user.role.includes('Ecurie-Aix Mitglied') || user.role.includes('Ecurie-Aix'))) {
+                        console.log(user.role)
+                        if (link.label === 'Beitrag erstellen' && (user.role.includes('Ecurie-Aix Mitglied'))) {
+                            
                             return null;
                         }
                         
